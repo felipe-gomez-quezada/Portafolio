@@ -103,12 +103,12 @@ const translations = {
     "cv.education": "Education",
     "cv.languages": "Languages",
     "cv.certifications": "Certifications",
-    
+
     // Footer
     "footer.builtWith": "Built with",
     "footer.and": "and React",
     "footer.rights": "All rights reserved.",
-    
+
     // Languages
     "lang.spanish": "Spanish",
     "lang.english": "English",
