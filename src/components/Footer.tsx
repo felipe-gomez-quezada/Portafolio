@@ -1,8 +1,10 @@
 import { Github, Linkedin, Heart, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 import cvData from "@/data/cvData.json";
 
 const Footer = () => {
+  const { language, t } = useLanguage();
   const { personal } = cvData;
 
   const scrollToTop = () => {
@@ -16,10 +18,10 @@ const Footer = () => {
           {/* Left side */}
           <div className="text-center md:text-left">
             <p className="text-lg font-semibold text-foreground mb-1">
-              {personal.name}
+              {personal.shortName}
             </p>
             <p className="text-sm text-muted-foreground">
-              {personal.title}
+              {personal.title[language as keyof typeof personal.title]}
             </p>
           </div>
 
@@ -46,7 +48,7 @@ const Footer = () => {
           {/* Right side */}
           <div className="flex items-center gap-4">
             <p className="text-sm text-muted-foreground flex items-center gap-1">
-              Built with <Heart className="h-4 w-4 text-destructive fill-destructive" /> and React
+              {t("footer.builtWith")} <Heart className="h-4 w-4 text-destructive fill-destructive" /> {t("footer.and")}
             </p>
             <Button
               variant="ghost"
@@ -62,7 +64,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="mt-8 pt-6 border-t border-border/30 text-center">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} {personal.name}. All rights reserved.
+            © {new Date().getFullYear()} {personal.shortName}. {t("footer.rights")}
           </p>
         </div>
       </div>

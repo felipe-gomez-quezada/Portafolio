@@ -6,20 +6,25 @@ import ExperienceTimeline from "@/components/ExperienceTimeline";
 import LiveCVModal from "@/components/LiveCVModal";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet-async";
+import { useLanguage } from "@/contexts/LanguageContext";
 import cvData from "@/data/cvData.json";
 
 const Index = () => {
   const [isCVOpen, setIsCVOpen] = useState(false);
+  const { language } = useLanguage();
+
+  const title = cvData.personal.title[language as keyof typeof cvData.personal.title];
+  const description = cvData.personal.subheadline[language as keyof typeof cvData.personal.subheadline];
 
   return (
     <>
       <Helmet>
-        <title>{cvData.personal.name} | {cvData.personal.title}</title>
-        <meta name="description" content={cvData.personal.subheadline} />
-        <meta property="og:title" content={`${cvData.personal.name} | ${cvData.personal.title}`} />
-        <meta property="og:description" content={cvData.personal.subheadline} />
+        <title>{cvData.personal.shortName} | {title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={`${cvData.personal.shortName} | ${title}`} />
+        <meta property="og:description" content={description} />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://felipegomez.dev" />
+        <html lang={language} />
       </Helmet>
 
       <div className="min-h-screen bg-background">

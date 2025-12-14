@@ -1,11 +1,22 @@
 {
   "personal": {
-    "name": "Felipe Gomez Quezada",
-    "title": "Chief Technology Officer",
-    "headline": "Building High-Performance Tech Teams & Scalable Architectures.",
-    "subheadline": "CTO specialized in scaling startups. Transforming business vision into engineering reality.",
+    "name": "Felipe Andrés Gómez Quezada",
+    "shortName": "Felipe Gómez",
+    "title": {
+      "es": "Chief Technology Officer",
+      "en": "Chief Technology Officer"
+    },
+    "headline": {
+      "es": "Construyendo Equipos Tech de Alto Rendimiento & Arquitecturas Escalables.",
+      "en": "Building High-Performance Tech Teams & Scalable Architectures."
+    },
+    "subheadline": {
+      "es": "CTO especializado en escalar startups. Transformando visión de negocio en realidad de ingeniería.",
+      "en": "CTO specialized in scaling startups. Transforming business vision into engineering reality."
+    },
     "location": "Santiago, Chile",
-    "email": "contact@felipegomez.dev",
+    "email": "felipe.gomez.quezada@gmail.com",
+    "phone": "+56 9 64059392",
     "links": {
       "linkedin": "https://www.linkedin.com/in/felipegomezquezada/",
       "github": "https://github.com/felipe-gomez-quezada"
@@ -14,47 +25,187 @@
   "experience": [
     {
       "id": 1,
-      "role": "Chief Technology Officer",
-      "company": "Examedi",
-      "period": "2022 - Present",
-      "focus": "Scaling health-tech solutions",
-      "description": "Leading engineering teams to build scalable healthcare technology platforms. Implementing microservices architecture and cloud-native solutions.",
+      "role": {
+        "es": "Chief Technology Officer",
+        "en": "Chief Technology Officer"
+      },
+      "company": "Lifebox",
+      "period": "2024 - Presente",
+      "periodEn": "2024 - Present",
+      "focus": {
+        "es": "Estrategia tecnológica y liderazgo",
+        "en": "Technology strategy and leadership"
+      },
+      "description": {
+        "es": "Liderar y dirigir la estrategia tecnológica de Lifebox. Asegurar que las inversiones tecnológicas se ajusten a los objetivos de la organización, dirigir y expandir el equipo de tecnología, establecer la visión a largo plazo, metodologías y estándares de calidad.",
+        "en": "Lead and direct Lifebox's technology strategy. Ensure technology investments align with organizational objectives, lead and expand the technology team, establish long-term vision, methodologies and quality standards."
+      },
       "current": true
     },
     {
       "id": 2,
-      "role": "Chief Technology Officer",
-      "company": "KLog.co",
-      "period": "2020 - 2022",
-      "focus": "Logistics digitization",
-      "description": "Spearheaded digital transformation initiatives for logistics operations. Built high-performance teams and implemented modern tech stack.",
+      "role": {
+        "es": "Tech Lead",
+        "en": "Tech Lead"
+      },
+      "company": "Lifebox",
+      "period": "2023 - 2024",
+      "periodEn": "2023 - 2024",
+      "focus": {
+        "es": "Digital Factory y desarrollo de productos",
+        "en": "Digital Factory and product development"
+      },
+      "description": {
+        "es": "Expandir funcionalidades de productos tecnológicos internos, colaborar en el desarrollo de nuevos productos, planificar futuros proyectos tecnológicos, crear y consolidar la Digital Factory.",
+        "en": "Expand internal tech product functionalities, collaborate in new product development, plan future technology projects, create and consolidate the Digital Factory."
+      },
       "current": false
     },
     {
       "id": 3,
-      "role": "Tech Lead",
-      "company": "Cencosud",
-      "period": "2018 - 2020",
-      "focus": "Enterprise retail systems",
-      "description": "Led development of enterprise-scale retail systems. Managed cross-functional teams and delivered mission-critical applications.",
+      "role": {
+        "es": "Ingeniero de Software",
+        "en": "Software Engineer"
+      },
+      "company": "Toku",
+      "period": "2022 - 2023",
+      "periodEn": "2022 - 2023",
+      "focus": {
+        "es": "Full Stack - Industria de pagos",
+        "en": "Full Stack - Payments industry"
+      },
+      "description": {
+        "es": "Ingeniero Full Stack usando Python, FastAPI, Postgres, Vue y Docker. Creación de funcionalidades y solución de bugs en la industria de pagos en Chile.",
+        "en": "Full Stack Engineer using Python, FastAPI, Postgres, Vue and Docker. Feature development and bug fixing in Chile's payments industry."
+      },
       "current": false
+    },
+    {
+      "id": 4,
+      "role": {
+        "es": "Ingeniero de Software",
+        "en": "Software Engineer"
+      },
+      "company": "Total Abogados",
+      "period": "2022",
+      "periodEn": "2022",
+      "focus": {
+        "es": "Backend y Portal de Pagos",
+        "en": "Backend and Payment Portal"
+      },
+      "description": {
+        "es": "Desarrollo de aplicaciones en Python, Angular, MongoDB, Docker. Diseño y desarrollo de Portal de Pagos usando Python y Flask.",
+        "en": "Application development in Python, Angular, MongoDB, Docker. Design and development of Payment Portal using Python and Flask."
+      },
+      "current": false
+    },
+    {
+      "id": 5,
+      "role": {
+        "es": "Analista de Business Intelligence",
+        "en": "Business Intelligence Analyst"
+      },
+      "company": "Amipass",
+      "period": "2021",
+      "periodEn": "2021",
+      "focus": {
+        "es": "Machine Learning y análisis de datos",
+        "en": "Machine Learning and data analysis"
+      },
+      "description": {
+        "es": "Creación de algoritmos de análisis de datos y machine learning para gestión de beneficios alimentarios de más de 120.000 trabajadores.",
+        "en": "Creation of data analysis and machine learning algorithms for food benefits management of over 120,000 workers."
+      },
+      "current": false
+    }
+  ],
+  "education": [
+    {
+      "degree": {
+        "es": "Ingeniería Civil en Computación",
+        "en": "Computer Science Engineering"
+      },
+      "institution": "Pontificia Universidad Católica de Chile",
+      "period": "2018 - 2020",
+      "description": {
+        "es": "En proceso de obtención del título de Ingeniero Civil de Computación",
+        "en": "In process of obtaining Computer Science Engineering degree"
+      }
+    },
+    {
+      "degree": {
+        "es": "Licenciatura en Ciencias de la Ingeniería",
+        "en": "Bachelor in Engineering Sciences"
+      },
+      "institution": "Pontificia Universidad Católica de Chile",
+      "period": "2014 - 2018",
+      "description": {
+        "es": "",
+        "en": ""
+      }
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Huawei HCIA Course",
+      "issuer": "Huawei",
+      "date": "2020",
+      "description": {
+        "es": "Curso de nivel básico-intermedio de inteligencia artificial, técnicas de estado del arte, análisis de datos y frameworks de ML.",
+        "en": "Basic-intermediate level AI course, state-of-the-art techniques, data analysis and ML frameworks."
+      }
+    }
+  ],
+  "languages": [
+    {
+      "language": {
+        "es": "Español",
+        "en": "Spanish"
+      },
+      "level": {
+        "es": "Lengua materna",
+        "en": "Native"
+      }
+    },
+    {
+      "language": {
+        "es": "Inglés",
+        "en": "English"
+      },
+      "level": {
+        "es": "Upper-Intermediate (TOEIC)",
+        "en": "Upper-Intermediate (TOEIC)"
+      }
     }
   ],
   "techStack": {
     "production": {
-      "title": "Production Stack",
-      "subtitle": "Current Expertise",
+      "title": {
+        "es": "Stack de Producción",
+        "en": "Production Stack"
+      },
+      "subtitle": {
+        "es": "Expertise Actual",
+        "en": "Current Expertise"
+      },
       "items": [
         { "name": "Python", "category": "Backend", "icon": "Code2" },
-        { "name": "Nuxt", "category": "Frontend", "icon": "Layers" },
-        { "name": "ExpressJS", "category": "Microservices", "icon": "Server" },
-        { "name": "Azure Container Apps", "category": "Cloud", "icon": "Cloud" },
-        { "name": "Azure Functions", "category": "Serverless", "icon": "Zap" }
+        { "name": "Nuxt 3", "category": "Frontend", "icon": "Layers" },
+        { "name": "Vue", "category": "Frontend", "icon": "Layers" },
+        { "name": "FastAPI", "category": "Backend", "icon": "Zap" },
+        { "name": "PostgreSQL", "category": "Database", "icon": "Database" },
+        { "name": "Docker", "category": "DevOps", "icon": "Container" }
       ]
     },
     "experimental": {
-      "title": "Experimental Lab",
-      "subtitle": "Currently Learning",
+      "title": {
+        "es": "Laboratorio Experimental",
+        "en": "Experimental Lab"
+      },
+      "subtitle": {
+        "es": "Aprendiendo Actualmente",
+        "en": "Currently Learning"
+      },
       "items": [
         { "name": "Next.js", "category": "Framework", "icon": "Sparkles" },
         { "name": "Vercel", "category": "Platform", "icon": "Triangle" },
@@ -62,8 +213,14 @@
       ]
     },
     "toolkit": {
-      "title": "CTO Toolkit",
-      "subtitle": "Productivity & AI",
+      "title": {
+        "es": "Toolkit CTO",
+        "en": "CTO Toolkit"
+      },
+      "subtitle": {
+        "es": "Productividad & IA",
+        "en": "Productivity & AI"
+      },
       "items": [
         { "name": "Cursor Pro", "category": "AI Tool", "icon": "Bot" },
         { "name": "Notion", "category": "Knowledge Base", "icon": "BookOpen" },
@@ -71,12 +228,22 @@
       ]
     }
   },
-  "skills": [
-    "Team Leadership",
-    "Technical Architecture",
-    "Cloud Infrastructure",
-    "Agile Methodologies",
-    "Startup Scaling",
-    "Digital Transformation"
-  ]
+  "skills": {
+    "es": [
+      "Liderazgo de Equipos",
+      "Arquitectura Técnica",
+      "Infraestructura Cloud",
+      "Metodologías Ágiles",
+      "Escalamiento de Startups",
+      "Transformación Digital"
+    ],
+    "en": [
+      "Team Leadership",
+      "Technical Architecture",
+      "Cloud Infrastructure",
+      "Agile Methodologies",
+      "Startup Scaling",
+      "Digital Transformation"
+    ]
+  }
 }

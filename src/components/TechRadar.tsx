@@ -1,5 +1,6 @@
-import { Code2, Layers, Server, Cloud, Zap, Sparkles, Triangle, Database, Bot, BookOpen, Mail, LucideIcon } from "lucide-react";
+import { Code2, Layers, Server, Cloud, Zap, Sparkles, Triangle, Database, Bot, BookOpen, Mail, Box, LucideIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/contexts/LanguageContext";
 import cvData from "@/data/cvData.json";
 
 const iconMap: Record<string, LucideIcon> = {
@@ -14,6 +15,7 @@ const iconMap: Record<string, LucideIcon> = {
   Bot,
   BookOpen,
   Mail,
+  Container: Box,
 };
 
 interface TechItem {
@@ -27,9 +29,10 @@ interface TechCategoryProps {
   subtitle: string;
   items: TechItem[];
   variant: "production" | "experimental" | "toolkit";
+  toolsLabel: string;
 }
 
-const TechCategory = ({ title, subtitle, items, variant }: TechCategoryProps) => {
+const TechCategory = ({ title, subtitle, items, variant, toolsLabel }: TechCategoryProps) => {
   const variantStyles = {
     production: "border-primary/30 hover:border-primary/60",
     experimental: "border-accent/30 hover:border-accent/60",
@@ -50,7 +53,7 @@ const TechCategory = ({ title, subtitle, items, variant }: TechCategoryProps) =>
           <p className="text-sm text-muted-foreground">{subtitle}</p>
         </div>
         <Badge className={`${badgeVariants[variant]} border font-mono text-xs`}>
-          {items.length} tools
+          {items.length} {toolsLabel}
         </Badge>
       </div>
       <div className="grid grid-cols-1 gap-3">
@@ -77,6 +80,7 @@ const TechCategory = ({ title, subtitle, items, variant }: TechCategoryProps) =>
 };
 
 const TechRadar = () => {
+  const { language, t } = useLanguage();
   const { techStack } = cvData;
 
   return (
@@ -85,13 +89,13 @@ const TechRadar = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <Badge className="bg-secondary text-muted-foreground border-border mb-4">
-            Tech Radar
+            {t("tech.badge")}
           </Badge>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Technology Stack</span>
+            <span className="gradient-text">{t("tech.title")}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            A curated collection of tools and technologies I use to build scalable systems and lead high-performance teams.
+            {t("tech.description")}
           </p>
         </div>
 
@@ -99,26 +103,29 @@ const TechRadar = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 lg:row-span-1">
             <TechCategory
-              title={techStack.production.title}
-              subtitle={techStack.production.subtitle}
+              title={techStack.production.title[language as keyof typeof techStack.production.title]}
+              subtitle={techStack.production.subtitle[language as keyof typeof techStack.production.subtitle]}
               items={techStack.production.items}
               variant="production"
+              toolsLabel={t("tech.tools")}
             />
           </div>
           <div>
             <TechCategory
-              title={techStack.experimental.title}
-              subtitle={techStack.experimental.subtitle}
+              title={techStack.experimental.title[language as keyof typeof techStack.experimental.title]}
+              subtitle={techStack.experimental.subtitle[language as keyof typeof techStack.experimental.subtitle]}
               items={techStack.experimental.items}
               variant="experimental"
+              toolsLabel={t("tech.tools")}
             />
           </div>
           <div className="md:col-span-2 lg:col-span-1">
             <TechCategory
-              title={techStack.toolkit.title}
-              subtitle={techStack.toolkit.subtitle}
+              title={techStack.toolkit.title[language as keyof typeof techStack.toolkit.title]}
+              subtitle={techStack.toolkit.subtitle[language as keyof typeof techStack.toolkit.subtitle]}
               items={techStack.toolkit.items}
               variant="toolkit"
+              toolsLabel={t("tech.tools")}
             />
           </div>
         </div>

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Menu, X, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 import cvData from "@/data/cvData.json";
 
 interface NavigationProps {
@@ -10,6 +12,7 @@ interface NavigationProps {
 const Navigation = ({ onOpenCV }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,8 +23,8 @@ const Navigation = ({ onOpenCV }: NavigationProps) => {
   }, []);
 
   const navLinks = [
-    { href: "#tech-stack", label: "Tech Stack" },
-    { href: "#experience", label: "Experience" },
+    { href: "#tech-stack", label: t("nav.techStack") },
+    { href: "#experience", label: t("nav.experience") },
   ];
 
   const scrollToSection = (href: string) => {
@@ -45,7 +48,7 @@ const Navigation = ({ onOpenCV }: NavigationProps) => {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
             <span className="text-xl font-bold gradient-text">
-              {cvData.personal.name.split(" ")[0]}
+              {cvData.personal.shortName.split(" ")[0]}
             </span>
             <span className="text-xl font-light text-muted-foreground">
               .dev
@@ -64,6 +67,7 @@ const Navigation = ({ onOpenCV }: NavigationProps) => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </button>
             ))}
+            <LanguageSwitcher />
             <Button
               size="sm"
               variant="outline"
@@ -71,23 +75,25 @@ const Navigation = ({ onOpenCV }: NavigationProps) => {
               className="border-primary/50 text-primary hover:bg-primary/10"
             >
               <FileText className="h-4 w-4 mr-2" />
-              View CV
+              {t("nav.viewCV")}
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </Button>
+          <div className="flex items-center gap-2 md:hidden">
+            <LanguageSwitcher />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -113,7 +119,7 @@ const Navigation = ({ onOpenCV }: NavigationProps) => {
                 className="border-primary/50 text-primary hover:bg-primary/10 w-fit"
               >
                 <FileText className="h-4 w-4 mr-2" />
-                View CV
+                {t("nav.viewCV")}
               </Button>
             </div>
           </div>
