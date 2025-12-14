@@ -1,0 +1,130 @@
+import { Code2, Layers, Server, Cloud, Zap, Sparkles, Triangle, Database, Bot, BookOpen, Mail, LucideIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import cvData from "@/data/cvData.json";
+
+const iconMap: Record<string, LucideIcon> = {
+  Code2,
+  Layers,
+  Server,
+  Cloud,
+  Zap,
+  Sparkles,
+  Triangle,
+  Database,
+  Bot,
+  BookOpen,
+  Mail,
+};
+
+interface TechItem {
+  name: string;
+  category: string;
+  icon: string;
+}
+
+interface TechCategoryProps {
+  title: string;
+  subtitle: string;
+  items: TechItem[];
+  variant: "production" | "experimental" | "toolkit";
+}
+
+const TechCategory = ({ title, subtitle, items, variant }: TechCategoryProps) => {
+  const variantStyles = {
+    production: "border-primary/30 hover:border-primary/60",
+    experimental: "border-accent/30 hover:border-accent/60",
+    toolkit: "border-muted-foreground/30 hover:border-muted-foreground/60",
+  };
+
+  const badgeVariants = {
+    production: "bg-primary/20 text-primary border-primary/30",
+    experimental: "bg-accent/20 text-accent border-accent/30",
+    toolkit: "bg-muted text-muted-foreground border-border",
+  };
+
+  return (
+    <div className={`bento-item ${variantStyles[variant]}`}>
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+          <p className="text-sm text-muted-foreground">{subtitle}</p>
+        </div>
+        <Badge className={`${badgeVariants[variant]} border font-mono text-xs`}>
+          {items.length} tools
+        </Badge>
+      </div>
+      <div className="grid grid-cols-1 gap-3">
+        {items.map((item) => {
+          const IconComponent = iconMap[item.icon] || Code2;
+          return (
+            <div
+              key={item.name}
+              className="tech-card group flex items-center gap-4"
+            >
+              <div className={`p-2 rounded-lg ${variant === 'production' ? 'bg-primary/10' : variant === 'experimental' ? 'bg-accent/10' : 'bg-muted'}`}>
+                <IconComponent className={`h-5 w-5 ${variant === 'production' ? 'text-primary' : variant === 'experimental' ? 'text-accent' : 'text-muted-foreground'}`} />
+              </div>
+              <div className="flex-1">
+                <p className="font-medium text-foreground">{item.name}</p>
+                <p className="text-xs text-muted-foreground">{item.category}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+const TechRadar = () => {
+  const { techStack } = cvData;
+
+  return (
+    <section id="tech-stack" className="py-20 px-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <Badge className="bg-secondary text-muted-foreground border-border mb-4">
+            Tech Radar
+          </Badge>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            <span className="gradient-text">Technology Stack</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            A curated collection of tools and technologies I use to build scalable systems and lead high-performance teams.
+          </p>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 lg:row-span-1">
+            <TechCategory
+              title={techStack.production.title}
+              subtitle={techStack.production.subtitle}
+              items={techStack.production.items}
+              variant="production"
+            />
+          </div>
+          <div>
+            <TechCategory
+              title={techStack.experimental.title}
+              subtitle={techStack.experimental.subtitle}
+              items={techStack.experimental.items}
+              variant="experimental"
+            />
+          </div>
+          <div className="md:col-span-2 lg:col-span-1">
+            <TechCategory
+              title={techStack.toolkit.title}
+              subtitle={techStack.toolkit.subtitle}
+              items={techStack.toolkit.items}
+              variant="toolkit"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default TechRadar;

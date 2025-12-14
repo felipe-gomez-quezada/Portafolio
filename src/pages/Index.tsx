@@ -1,13 +1,41 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import Navigation from "@/components/Navigation";
+import HeroSection from "@/components/HeroSection";
+import TechRadar from "@/components/TechRadar";
+import ExperienceTimeline from "@/components/ExperienceTimeline";
+import LiveCVModal from "@/components/LiveCVModal";
+import Footer from "@/components/Footer";
+import { Helmet } from "react-helmet-async";
+import cvData from "@/data/cvData.json";
 
 const Index = () => {
+  const [isCVOpen, setIsCVOpen] = useState(false);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <>
+      <Helmet>
+        <title>{cvData.personal.name} | {cvData.personal.title}</title>
+        <meta name="description" content={cvData.personal.subheadline} />
+        <meta property="og:title" content={`${cvData.personal.name} | ${cvData.personal.title}`} />
+        <meta property="og:description" content={cvData.personal.subheadline} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://felipegomez.dev" />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Navigation onOpenCV={() => setIsCVOpen(true)} />
+        
+        <main>
+          <HeroSection onOpenCV={() => setIsCVOpen(true)} />
+          <TechRadar />
+          <ExperienceTimeline />
+        </main>
+
+        <Footer />
+
+        <LiveCVModal isOpen={isCVOpen} onClose={() => setIsCVOpen(false)} />
       </div>
-    </div>
+    </>
   );
 };
 
