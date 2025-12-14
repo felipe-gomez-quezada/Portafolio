@@ -46,26 +46,24 @@ const Footer = () => {
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-4">
-            <p className="text-sm text-muted-foreground flex items-center gap-1">
-              {t("footer.builtWith")} <Heart className="h-4 w-4 text-destructive fill-destructive" /> {t("footer.and")}
+          <div className="flex flex-col items-center md:items-end gap-2">
+            <div className="flex items-center gap-4">
+              <p className="text-sm text-muted-foreground flex items-center gap-1">
+                {t("footer.builtWith")} <Heart className="h-4 w-4 text-destructive fill-destructive" /> {t("footer.and")}
+              </p>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={scrollToTop}
+                className="hover:bg-primary/10 hover:text-primary"
+              >
+                <ArrowUp className="h-4 w-4" />
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              © {new Date().getFullYear()} {personal.shortName}. {t("footer.rights")}
             </p>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={scrollToTop}
-              className="hover:bg-primary/10 hover:text-primary"
-            >
-              <ArrowUp className="h-4 w-4" />
-            </Button>
           </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="mt-8 pt-6 border-t border-border/30 text-center">
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} {personal.shortName}. {t("footer.rights")}
-          </p>
         </div>
       </div>
     </footer>
