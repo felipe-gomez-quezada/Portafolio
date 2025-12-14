@@ -61,6 +61,20 @@ const translations = {
     "lang.english": "Inglés",
     "lang.native": "Lengua materna",
     "lang.upperIntermediate": "Nivel Upper-Intermediate",
+    
+    // Contact
+    "contact.title": "Trabajemos Juntos",
+    "contact.subtitle": "Estoy disponible para proyectos de consultoría, colaboraciones y oportunidades interesantes.",
+    "contact.description": "Tengo experiencia liderando transformaciones tecnológicas y construyendo equipos de alto rendimiento. Si tienes un proyecto que necesite visión técnica y ejecución sólida, hablemos.",
+    "contact.cta": "Contáctame",
+    "contact.email": "Email",
+    "contact.emailDesc": "Escríbeme directamente",
+    "contact.whatsapp": "WhatsApp",
+    "contact.whatsappDesc": "Hablemos por mensaje",
+    "contact.linkedin": "LinkedIn",
+    "contact.linkedinDesc": "Conéctate y charlemos",
+    "contact.preferredMethods": "Formas preferidas de contacto",
+    "contact.backHome": "Volver al inicio",
   },
   en: {
     // Navigation
@@ -114,6 +128,20 @@ const translations = {
     "lang.english": "English",
     "lang.native": "Native language",
     "lang.upperIntermediate": "Upper-Intermediate Level",
+    
+    // Contact
+    "contact.title": "Let's Work Together",
+    "contact.subtitle": "I'm available for consulting projects, collaborations, and interesting opportunities.",
+    "contact.description": "I have experience leading technical transformations and building high-performance teams. If you have a project that needs technical vision and solid execution, let's talk.",
+    "contact.cta": "Get in Touch",
+    "contact.email": "Email",
+    "contact.emailDesc": "Send me a direct message",
+    "contact.whatsapp": "WhatsApp",
+    "contact.whatsappDesc": "Let's chat via message",
+    "contact.linkedin": "LinkedIn",
+    "contact.linkedinDesc": "Connect and chat",
+    "contact.preferredMethods": "Preferred contact methods",
+    "contact.backHome": "Back to home",
   }
 };
 

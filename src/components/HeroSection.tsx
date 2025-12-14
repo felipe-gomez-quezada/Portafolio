@@ -1,6 +1,7 @@
 import { Download, Github, Linkedin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 import cvData from "@/data/cvData.json";
 import ParticleEffect from "@/components/ParticleEffect";
 
@@ -31,10 +32,15 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
           {/* Left Column - Content */}
           <div className="text-left space-y-6">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-border/50 animate-fade-in">
+            <Link 
+              to="/contacto"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-pointer group animate-fade-in"
+            >
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse-glow" />
-              <span className="text-sm text-muted-foreground">{t("hero.available")}</span>
-            </div>
+              <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors">
+                {t("hero.available")}
+              </span>
+            </Link>
 
             {/* Name */}
             <h2 className="text-lg md:text-xl font-mono text-primary animate-fade-in animation-delay-200">
