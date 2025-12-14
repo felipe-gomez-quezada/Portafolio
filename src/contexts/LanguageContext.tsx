@@ -13,10 +13,11 @@ const translations = {
     // Navigation
     "nav.techStack": "Stack Tecnológico",
     "nav.experience": "Experiencia",
+    "nav.workTogether": "Trabajemos Juntos",
     "nav.viewCV": "Ver CV",
     
     // Hero
-    "hero.available": "Disponible para consultoría",
+    "hero.available": "Disponible parcialmente",
     "hero.headline.part1": "Construyendo Equipos Tech de Alto Rendimiento",
     "hero.headline.part2": "& Arquitecturas Escalables.",
     "hero.subheadline": "CTO especializado en escalar startups. Transformando visión de negocio en realidad de ingeniería.",
@@ -64,7 +65,7 @@ const translations = {
     
     // Contact
     "contact.title": "Trabajemos Juntos",
-    "contact.subtitle": "Estoy disponible para proyectos de consultoría, colaboraciones y oportunidades interesantes.",
+    "contact.subtitle": "Estoy parcialmente disponible para proyectos de consultoría, colaboraciones y oportunidades interesantes (actualmente trabajo fulltime).",
     "contact.description": "Tengo experiencia liderando transformaciones tecnológicas y construyendo equipos de alto rendimiento. Si tienes un proyecto que necesite visión técnica y ejecución sólida, hablemos.",
     "contact.cta": "Contáctame",
     "contact.email": "Email",
@@ -80,10 +81,11 @@ const translations = {
     // Navigation
     "nav.techStack": "Tech Stack",
     "nav.experience": "Experience",
+    "nav.workTogether": "Let's Work Together",
     "nav.viewCV": "View CV",
     
     // Hero
-    "hero.available": "Available for consulting",
+    "hero.available": "Partially available for consulting",
     "hero.headline.part1": "Building High-Performance Tech Teams",
     "hero.headline.part2": "& Scalable Architectures.",
     "hero.subheadline": "CTO specialized in scaling startups. Transforming business vision into engineering reality.",
@@ -131,7 +133,7 @@ const translations = {
     
     // Contact
     "contact.title": "Let's Work Together",
-    "contact.subtitle": "I'm available for consulting projects, collaborations, and interesting opportunities.",
+    "contact.subtitle": "I have limited time available for consulting projects, collaborations, and interesting opportunities (currently working fulltime).",
     "contact.description": "I have experience leading technical transformations and building high-performance teams. If you have a project that needs technical vision and solid execution, let's talk.",
     "contact.cta": "Get in Touch",
     "contact.email": "Email",
