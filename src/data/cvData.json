@@ -1,0 +1,82 @@
+{
+  "personal": {
+    "name": "Felipe Gomez Quezada",
+    "title": "Chief Technology Officer",
+    "headline": "Building High-Performance Tech Teams & Scalable Architectures.",
+    "subheadline": "CTO specialized in scaling startups. Transforming business vision into engineering reality.",
+    "location": "Santiago, Chile",
+    "email": "contact@felipegomez.dev",
+    "links": {
+      "linkedin": "https://www.linkedin.com/in/felipegomezquezada/",
+      "github": "https://github.com/felipe-gomez-quezada"
+    }
+  },
+  "experience": [
+    {
+      "id": 1,
+      "role": "Chief Technology Officer",
+      "company": "Examedi",
+      "period": "2022 - Present",
+      "focus": "Scaling health-tech solutions",
+      "description": "Leading engineering teams to build scalable healthcare technology platforms. Implementing microservices architecture and cloud-native solutions.",
+      "current": true
+    },
+    {
+      "id": 2,
+      "role": "Chief Technology Officer",
+      "company": "KLog.co",
+      "period": "2020 - 2022",
+      "focus": "Logistics digitization",
+      "description": "Spearheaded digital transformation initiatives for logistics operations. Built high-performance teams and implemented modern tech stack.",
+      "current": false
+    },
+    {
+      "id": 3,
+      "role": "Tech Lead",
+      "company": "Cencosud",
+      "period": "2018 - 2020",
+      "focus": "Enterprise retail systems",
+      "description": "Led development of enterprise-scale retail systems. Managed cross-functional teams and delivered mission-critical applications.",
+      "current": false
+    }
+  ],
+  "techStack": {
+    "production": {
+      "title": "Production Stack",
+      "subtitle": "Current Expertise",
+      "items": [
+        { "name": "Python", "category": "Backend", "icon": "Code2" },
+        { "name": "Nuxt", "category": "Frontend", "icon": "Layers" },
+        { "name": "ExpressJS", "category": "Microservices", "icon": "Server" },
+        { "name": "Azure Container Apps", "category": "Cloud", "icon": "Cloud" },
+        { "name": "Azure Functions", "category": "Serverless", "icon": "Zap" }
+      ]
+    },
+    "experimental": {
+      "title": "Experimental Lab",
+      "subtitle": "Currently Learning",
+      "items": [
+        { "name": "Next.js", "category": "Framework", "icon": "Sparkles" },
+        { "name": "Vercel", "category": "Platform", "icon": "Triangle" },
+        { "name": "Supabase", "category": "Backend", "icon": "Database" }
+      ]
+    },
+    "toolkit": {
+      "title": "CTO Toolkit",
+      "subtitle": "Productivity & AI",
+      "items": [
+        { "name": "Cursor Pro", "category": "AI Tool", "icon": "Bot" },
+        { "name": "Notion", "category": "Knowledge Base", "icon": "BookOpen" },
+        { "name": "Google Workspace", "category": "Collaboration", "icon": "Mail" }
+      ]
+    }
+  },
+  "skills": [
+    "Team Leadership",
+    "Technical Architecture",
+    "Cloud Infrastructure",
+    "Agile Methodologies",
+    "Startup Scaling",
+    "Digital Transformation"
+  ]
+}
