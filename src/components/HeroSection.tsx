@@ -2,6 +2,7 @@ import { Download, Github, Linkedin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import cvData from "@/data/cvData.json";
+import ParticleEffect from "@/components/ParticleEffect";
 
 interface HeroSectionProps {
   onOpenCV: () => void;
@@ -99,14 +100,19 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
 
           {/* Right Column - Profile Image */}
           <div className="flex justify-center md:justify-end animate-fade-in animation-delay-400">
-            <div className="relative inline-block">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-accent/30 to-primary/30 rounded-full blur-2xl scale-110 animate-pulse-glow" />
-              <img
-                src="/Felipe.png"
-                alt={personal.shortName}
-                className="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-primary/20 shadow-2xl shadow-primary/20 ring-4 ring-background"
-              />
-            </div>
+            <ParticleEffect 
+              className="relative w-64 h-64 md:w-80 md:h-80"
+              particleCount={40}
+            >
+              <div className="relative w-full h-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-accent/30 to-primary/30 rounded-full blur-2xl scale-110 animate-pulse-glow -z-10" />
+                <img
+                  src="/Felipe.png"
+                  alt={personal.shortName}
+                  className="w-full h-full rounded-full object-cover border-4 border-primary/20 shadow-2xl shadow-primary/20 ring-4 ring-background relative z-0"
+                />
+              </div>
+            </ParticleEffect>
           </div>
         </div>
 
