@@ -1,8 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Briefcase, MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import cvData from "@/data/cvData.json";
 
 const ExperienceTimeline = () => {
+  const { language, t } = useLanguage();
   const { experience } = cvData;
 
   return (
@@ -11,13 +13,13 @@ const ExperienceTimeline = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <Badge className="bg-secondary text-muted-foreground border-border mb-4">
-            Career Path
+            {t("exp.badge")}
           </Badge>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Experience</span>
+            <span className="gradient-text">{t("exp.title")}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            A track record of leading technical transformations and building teams that deliver.
+            {t("exp.description")}
           </p>
         </div>
 
@@ -45,12 +47,16 @@ const ExperienceTimeline = () => {
                       <div className="flex items-center gap-2 mb-1 flex-wrap">
                         {exp.current && (
                           <Badge className="bg-primary/20 text-primary border-primary/30 text-xs">
-                            Current
+                            {t("exp.current")}
                           </Badge>
                         )}
-                        <span className="text-sm font-mono text-muted-foreground">{exp.period}</span>
+                        <span className="text-sm font-mono text-muted-foreground">
+                          {language === 'es' ? exp.period : exp.periodEn}
+                        </span>
                       </div>
-                      <h3 className="text-xl font-bold text-foreground">{exp.role}</h3>
+                      <h3 className="text-xl font-bold text-foreground">
+                        {exp.role[language as keyof typeof exp.role]}
+                      </h3>
                       <div className={`flex items-center gap-2 mt-1 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
                         <Briefcase className="h-4 w-4 text-primary" />
                         <span className="text-primary font-medium">{exp.company}</span>
@@ -61,12 +67,14 @@ const ExperienceTimeline = () => {
                   {/* Focus area */}
                   <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/50 border border-border/50 mb-4 ${index % 2 === 0 ? "md:ml-auto" : ""}`}>
                     <MapPin className="h-3 w-3 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">{exp.focus}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {exp.focus[language as keyof typeof exp.focus]}
+                    </span>
                   </div>
 
                   {/* Description */}
                   <p className="text-muted-foreground text-sm leading-relaxed">
-                    {exp.description}
+                    {exp.description[language as keyof typeof exp.description]}
                   </p>
                 </div>
               </div>

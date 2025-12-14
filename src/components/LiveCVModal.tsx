@@ -1,7 +1,8 @@
-import { X, Printer, Download, Mail, Linkedin, Github, MapPin, Calendar, Briefcase } from "lucide-react";
+import { X, Printer, Mail, Linkedin, Github, MapPin, Calendar, Briefcase, GraduationCap, Award, Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { useLanguage } from "@/contexts/LanguageContext";
 import cvData from "@/data/cvData.json";
 
 interface LiveCVModalProps {
@@ -10,7 +11,8 @@ interface LiveCVModalProps {
 }
 
 const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
-  const { personal, experience, techStack, skills } = cvData;
+  const { language, t } = useLanguage();
+  const { personal, experience, techStack, skills, education, languages, certifications } = cvData;
 
   const handlePrint = () => {
     window.print();
@@ -24,7 +26,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
         <div className="max-w-4xl mx-auto">
           {/* Modal Header - Hidden on print */}
           <div className="flex items-center justify-between mb-6 no-print">
-            <h2 className="text-2xl font-bold text-foreground">Live CV</h2>
+            <h2 className="text-2xl font-bold text-foreground">{t("cv.title")}</h2>
             <div className="flex items-center gap-2">
               <Button 
                 variant="outline" 
@@ -33,7 +35,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                 className="border-border/50 hover:border-primary/50"
               >
                 <Printer className="h-4 w-4 mr-2" />
-                Print to PDF
+                {t("cv.print")}
               </Button>
               <Button 
                 variant="ghost" 
@@ -55,9 +57,11 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                   <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
                     {personal.name}
                   </h1>
-                  <p className="text-xl text-primary font-medium mb-4">{personal.title}</p>
+                  <p className="text-xl text-primary font-medium mb-4">
+                    {personal.title[language as keyof typeof personal.title]}
+                  </p>
                   <p className="text-muted-foreground max-w-md">
-                    {personal.subheadline}
+                    {personal.subheadline[language as keyof typeof personal.subheadline]}
                   </p>
                 </div>
                 <div className="flex flex-col gap-3 text-sm">
@@ -100,24 +104,53 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                 <div>
                   <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                     <Briefcase className="h-5 w-5 text-primary" />
-                    Professional Experience
+                    {t("cv.professionalExp")}
                   </h2>
                   <div className="space-y-6">
                     {experience.map((exp) => (
                       <div key={exp.id} className="relative pl-6 border-l-2 border-border hover:border-primary/50 transition-colors">
                         <div className="absolute left-0 top-0 w-2 h-2 rounded-full bg-primary -translate-x-[5px]" />
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
-                          <h3 className="font-semibold text-foreground">{exp.role}</h3>
+                          <h3 className="font-semibold text-foreground">
+                            {exp.role[language as keyof typeof exp.role]}
+                          </h3>
                           <div className="flex items-center gap-1 text-xs text-muted-foreground">
                             <Calendar className="h-3 w-3" />
-                            <span>{exp.period}</span>
+                            <span>{language === 'es' ? exp.period : exp.periodEn}</span>
                           </div>
                         </div>
                         <p className="text-primary font-medium text-sm mb-2">{exp.company}</p>
                         <Badge variant="secondary" className="mb-2 text-xs">
-                          {exp.focus}
+                          {exp.focus[language as keyof typeof exp.focus]}
                         </Badge>
-                        <p className="text-sm text-muted-foreground">{exp.description}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {exp.description[language as keyof typeof exp.description]}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Education */}
+                <div>
+                  <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                    <GraduationCap className="h-5 w-5 text-primary" />
+                    {t("cv.education")}
+                  </h2>
+                  <div className="space-y-4">
+                    {education.map((edu, index) => (
+                      <div key={index} className="relative pl-6 border-l-2 border-border">
+                        <div className="absolute left-0 top-0 w-2 h-2 rounded-full bg-accent -translate-x-[5px]" />
+                        <h3 className="font-semibold text-foreground">
+                          {edu.degree[language as keyof typeof edu.degree]}
+                        </h3>
+                        <p className="text-sm text-primary">{edu.institution}</p>
+                        <p className="text-xs text-muted-foreground">{edu.period}</p>
+                        {edu.description[language as keyof typeof edu.description] && (
+                          <p className="text-sm text-muted-foreground mt-1">
+                            {edu.description[language as keyof typeof edu.description]}
+                          </p>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -128,9 +161,9 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
               <div className="space-y-8">
                 {/* Skills */}
                 <div>
-                  <h2 className="text-lg font-bold text-foreground mb-4">Core Competencies</h2>
+                  <h2 className="text-lg font-bold text-foreground mb-4">{t("cv.coreCompetencies")}</h2>
                   <div className="flex flex-wrap gap-2">
-                    {skills.map((skill) => (
+                    {skills[language as keyof typeof skills].map((skill) => (
                       <Badge 
                         key={skill} 
                         variant="outline" 
@@ -146,11 +179,13 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
 
                 {/* Tech Stack */}
                 <div>
-                  <h2 className="text-lg font-bold text-foreground mb-4">Technical Stack</h2>
+                  <h2 className="text-lg font-bold text-foreground mb-4">{t("cv.technicalStack")}</h2>
                   
                   <div className="space-y-4">
                     <div>
-                      <p className="text-xs font-medium text-primary mb-2">{techStack.production.title}</p>
+                      <p className="text-xs font-medium text-primary mb-2">
+                        {techStack.production.title[language as keyof typeof techStack.production.title]}
+                      </p>
                       <div className="flex flex-wrap gap-1">
                         {techStack.production.items.map((item) => (
                           <Badge key={item.name} variant="secondary" className="text-xs">
@@ -161,7 +196,9 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                     </div>
 
                     <div>
-                      <p className="text-xs font-medium text-accent mb-2">{techStack.experimental.title}</p>
+                      <p className="text-xs font-medium text-accent mb-2">
+                        {techStack.experimental.title[language as keyof typeof techStack.experimental.title]}
+                      </p>
                       <div className="flex flex-wrap gap-1">
                         {techStack.experimental.items.map((item) => (
                           <Badge key={item.name} variant="secondary" className="text-xs bg-accent/10">
@@ -170,17 +207,49 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                         ))}
                       </div>
                     </div>
+                  </div>
+                </div>
 
-                    <div>
-                      <p className="text-xs font-medium text-muted-foreground mb-2">{techStack.toolkit.title}</p>
-                      <div className="flex flex-wrap gap-1">
-                        {techStack.toolkit.items.map((item) => (
-                          <Badge key={item.name} variant="outline" className="text-xs">
-                            {item.name}
-                          </Badge>
-                        ))}
+                <Separator />
+
+                {/* Languages */}
+                <div>
+                  <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                    <Languages className="h-4 w-4 text-primary" />
+                    {t("cv.languages")}
+                  </h2>
+                  <div className="space-y-2">
+                    {languages.map((lang, index) => (
+                      <div key={index} className="flex justify-between text-sm">
+                        <span className="text-foreground">
+                          {lang.language[language as keyof typeof lang.language]}
+                        </span>
+                        <span className="text-muted-foreground">
+                          {lang.level[language as keyof typeof lang.level]}
+                        </span>
                       </div>
-                    </div>
+                    ))}
+                  </div>
+                </div>
+
+                <Separator />
+
+                {/* Certifications */}
+                <div>
+                  <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                    <Award className="h-4 w-4 text-primary" />
+                    {t("cv.certifications")}
+                  </h2>
+                  <div className="space-y-3">
+                    {certifications.map((cert, index) => (
+                      <div key={index}>
+                        <p className="font-medium text-foreground text-sm">{cert.name}</p>
+                        <p className="text-xs text-primary">{cert.issuer} - {cert.date}</p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          {cert.description[language as keyof typeof cert.description]}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

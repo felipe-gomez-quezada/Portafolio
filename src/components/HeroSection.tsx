@@ -1,5 +1,6 @@
 import { Download, Github, Linkedin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 import cvData from "@/data/cvData.json";
 
 interface HeroSectionProps {
@@ -7,7 +8,12 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
+  const { language, t } = useLanguage();
   const { personal } = cvData;
+
+  const headline = personal.headline[language as keyof typeof personal.headline];
+  const subheadline = personal.subheadline[language as keyof typeof personal.subheadline];
+  const [headlinePart1, headlinePart2] = headline.split("&");
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-20">
@@ -23,24 +29,24 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-border/50 mb-8 animate-fade-in">
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse-glow" />
-          <span className="text-sm text-muted-foreground">Available for consulting</span>
+          <span className="text-sm text-muted-foreground">{t("hero.available")}</span>
         </div>
 
         {/* Name */}
         <h2 className="text-lg md:text-xl font-mono text-primary mb-4 animate-fade-in animation-delay-200">
-          {personal.name}
+          {personal.shortName}
         </h2>
 
         {/* Headline */}
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-fade-in animation-delay-400">
-          <span className="gradient-text">{personal.headline.split("&")[0]}&</span>
+          <span className="gradient-text">{headlinePart1}&</span>
           <br />
-          <span className="text-foreground">{personal.headline.split("&")[1]}</span>
+          <span className="text-foreground">{headlinePart2}</span>
         </h1>
 
         {/* Subheadline */}
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-fade-in animation-delay-600">
-          {personal.subheadline}
+          {subheadline}
         </p>
 
         {/* CTAs */}
@@ -51,7 +57,7 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
             onClick={onOpenCV}
           >
             <Download className="mr-2 h-4 w-4" />
-            Download CV
+            {t("hero.downloadCV")}
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
           <Button 
@@ -62,7 +68,7 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
           >
             <a href={personal.links.github} target="_blank" rel="noopener noreferrer">
               <Github className="mr-2 h-4 w-4" />
-              View GitHub
+              {t("hero.viewGithub")}
             </a>
           </Button>
         </div>
