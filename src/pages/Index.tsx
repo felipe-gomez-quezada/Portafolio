@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import TechRadar from "@/components/TechRadar";
@@ -7,14 +7,29 @@ import LiveCVModal from "@/components/LiveCVModal";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet-async";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useLocation } from "react-router-dom";
 import cvData from "@/data/cvData.json";
 
 const Index = () => {
   const [isCVOpen, setIsCVOpen] = useState(false);
   const { language } = useLanguage();
+  const location = useLocation();
 
   const title = cvData.personal.title[language as keyof typeof cvData.personal.title];
   const description = cvData.personal.subheadline[language as keyof typeof cvData.personal.subheadline];
+
+  // Scroll to section when navigating from another page with hash
+  useEffect(() => {
+    if (location.hash) {
+      // Small delay to ensure the page is fully rendered
+      setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, [location.hash]);
 
   return (
     <>
