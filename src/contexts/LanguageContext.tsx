@@ -45,8 +45,8 @@ const translations = {
     "exp.current": "Actual",
 
     // CV Modal
-    "cv.title": "CV en Vivo",
-    "cv.print": "Imprimir PDF",
+    "cv.title": "CV - Felipe Gómez Quezada",
+    "cv.print": "Descargar PDF",
     "cv.professionalExp": "Experiencia Profesional",
     "cv.coreCompetencies": "Competencias Clave",
     "cv.technicalStack": "Stack Técnico",
@@ -115,8 +115,8 @@ const translations = {
     "exp.current": "Current",
 
     // CV Modal
-    "cv.title": "Live CV",
-    "cv.print": "Print to PDF",
+    "cv.title": "CV - Felipe Gómez Quezada",
+    "cv.print": "Download PDF",
     "cv.professionalExp": "Professional Experience",
     "cv.coreCompetencies": "Core Competencies",
     "cv.technicalStack": "Technical Stack",

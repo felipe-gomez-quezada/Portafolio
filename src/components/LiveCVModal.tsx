@@ -1,9 +1,11 @@
-import { X, Printer, Mail, Linkedin, Github, MapPin, Calendar, Briefcase, GraduationCap, Award, Languages } from "lucide-react";
+import { X, Printer, Mail, Linkedin, Github, MapPin, Calendar, Briefcase, GraduationCap, Award, Languages, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/contexts/LanguageContext";
 import cvData from "@/data/cvData.json";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 interface LiveCVModalProps {
   isOpen: boolean;
@@ -12,10 +14,106 @@ interface LiveCVModalProps {
 
 const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
   const { language, t } = useLanguage();
-  const { personal, experience, techStack, skills, education, languages, certifications } = cvData;
+  const { personal, experience, techStack, skills, education, languages: languagesData, certifications } = cvData;
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleDownloadPDF = async () => {
+    const cvElement = document.querySelector('.cv-container') as HTMLElement;
+    if (!cvElement) return;
+
+    try {
+      // Crear canvas del CV
+      const canvas = await html2canvas(cvElement, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+      });
+
+      const imgData = canvas.toDataURL('image/png');
+      
+      // Calcular dimensiones del PDF (A4)
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgX = (pdfWidth - imgWidth * ratio) / 2;
+      const imgY = 0;
+
+      // PRIMERO: Agregar texto real para ATS (antes de la imagen para que esté en el fondo)
+      // El texto será invisible pero presente para los sistemas ATS
+      pdf.setFontSize(8);
+      pdf.setTextColor(255, 255, 255); // Texto blanco (invisible sobre fondo blanco pero presente en el PDF)
+      
+      // Construir todo el texto del CV
+      let fullText = `${personal.name}\n`;
+      fullText += `${personal.title[language as keyof typeof personal.title]}\n`;
+      fullText += `${personal.email} | ${personal.phone} | ${personal.location}\n`;
+      fullText += `${personal.links.linkedin} | ${personal.links.github}\n\n`;
+      fullText += `PROFESSIONAL EXPERIENCE\n`;
+      experience.forEach((exp) => {
+        fullText += `${exp.role[language as keyof typeof exp.role]} | ${exp.company} | ${language === 'es' ? exp.period : exp.periodEn}\n`;
+        fullText += `${exp.focus[language as keyof typeof exp.focus]}\n`;
+        fullText += `${exp.description[language as keyof typeof exp.description]}\n\n`;
+      });
+      fullText += `EDUCATION\n`;
+      education.forEach((edu) => {
+        fullText += `${edu.degree[language as keyof typeof edu.degree]} | ${edu.institution} | ${edu.period}\n`;
+        if (edu.description[language as keyof typeof edu.description]) {
+          fullText += `${edu.description[language as keyof typeof edu.description]}\n`;
+        }
+        fullText += `\n`;
+      });
+      fullText += `SKILLS: ${skills[language as keyof typeof skills].join(', ')}\n\n`;
+      fullText += `TECHNICAL STACK: `;
+      techStack.production.items.forEach((item) => {
+        fullText += `${item.name} (${item.category}), `;
+      });
+      techStack.experimental.items.forEach((item) => {
+        fullText += `${item.name} (${item.category}), `;
+      });
+      fullText += `\n\n`;
+      fullText += `LANGUAGES\n`;
+      languagesData.forEach((lang) => {
+        fullText += `${lang.language[language as keyof typeof lang.language]}: ${lang.level[language as keyof typeof lang.level]}\n`;
+      });
+      fullText += `\nCERTIFICATIONS\n`;
+      certifications.forEach((cert) => {
+        fullText += `${cert.name} | ${cert.issuer} | ${cert.date}\n`;
+        fullText += `${cert.description[language as keyof typeof cert.description]}\n\n`;
+      });
+      
+      // Agregar texto invisible al final del PDF (fuera del área visible pero presente)
+      const textLines = fullText.split('\n');
+      textLines.forEach((line, index) => {
+        pdf.text(line, 0, pdfHeight * 10 + (index * 0.1)); // Fuera del área visible
+      });
+
+      // SEGUNDO: Agregar imagen visual del CV
+      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+
+      // Agregar metadatos para ATS
+      pdf.setProperties({
+        title: `${personal.name} - CV`,
+        subject: 'Curriculum Vitae',
+        author: personal.name,
+        keywords: skills[language as keyof typeof skills].join(', ') + ', ' + 
+                 techStack.production.items.map(i => i.name).join(', '),
+        creator: 'Portfolio Website'
+      });
+
+      // Descargar PDF
+      pdf.save(`${personal.shortName.replace(/\s+/g, '_')}_CV_${language.toUpperCase()}.pdf`);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      // Fallback a print si falla
+      window.print();
+    }
   };
 
   if (!isOpen) return null;
@@ -31,10 +129,10 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
               <Button 
                 variant="outline" 
                 size="sm" 
-                onClick={handlePrint}
+                onClick={handleDownloadPDF}
                 className="border-border/50 hover:border-primary/50"
               >
-                <Printer className="h-4 w-4 mr-2" />
+                <Download className="h-4 w-4 mr-2" />
                 {t("cv.print")}
               </Button>
               <Button 
@@ -219,7 +317,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                     {t("cv.languages")}
                   </h2>
                   <div className="space-y-2">
-                    {languages.map((lang, index) => (
+                    {languagesData.map((lang, index) => (
                       <div key={index} className="flex justify-between text-sm">
                         <span className="text-foreground">
                           {lang.language[language as keyof typeof lang.language]}
