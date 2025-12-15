@@ -223,6 +223,8 @@
       },
       "items": [
         { "name": "Cursor Pro", "category": "AI Tool", "icon": "Bot" },
+        { "name": "Gemini Pro", "category": "Generative AI", "icon": "Sparkles" },
+        { "name": "V0", "category": "AI Prototyping", "icon": "Zap" },
         { "name": "Notion", "category": "Knowledge Base", "icon": "BookOpen" },
         { "name": "Google Workspace", "category": "Collaboration", "icon": "Mail" }
       ]

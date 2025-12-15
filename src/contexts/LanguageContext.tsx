@@ -15,7 +15,7 @@ const translations = {
     "nav.experience": "Experiencia",
     "nav.workTogether": "Trabajemos Juntos",
     "nav.viewCV": "Ver CV",
-    
+
     // Hero
     "hero.available": "Disponible parcialmente",
     "hero.headline.part1": "Construyendo Equipos Tech de Alto Rendimiento",
@@ -23,7 +23,7 @@ const translations = {
     "hero.subheadline": "CTO especializado en escalar startups. Transformando visión de negocio en realidad de ingeniería.",
     "hero.downloadCV": "Descargar CV",
     "hero.viewGithub": "Ver GitHub",
-    
+
     // Tech Radar
     "tech.badge": "Tech Radar",
     "tech.title": "Stack Tecnológico",
@@ -35,13 +35,15 @@ const translations = {
     "tech.toolkit.title": "Toolkit CTO",
     "tech.toolkit.subtitle": "Productividad & IA",
     "tech.tools": "herramientas",
-    
+    "tech.showMore": "Ver más",
+    "tech.showLess": "Ver menos",
+
     // Experience
     "exp.badge": "Trayectoria",
     "exp.title": "Experiencia",
     "exp.description": "Un historial de liderazgo en transformaciones tecnológicas y construcción de equipos que entregan resultados.",
     "exp.current": "Actual",
-    
+
     // CV Modal
     "cv.title": "CV en Vivo",
     "cv.print": "Imprimir PDF",
@@ -51,18 +53,18 @@ const translations = {
     "cv.education": "Formación Académica",
     "cv.languages": "Idiomas",
     "cv.certifications": "Certificaciones",
-    
+
     // Footer
     "footer.builtWith": "Construido con",
     "footer.and": "y React",
     "footer.rights": "Todos los derechos reservados.",
-    
+
     // Languages
     "lang.spanish": "Español",
     "lang.english": "Inglés",
     "lang.native": "Lengua materna",
     "lang.upperIntermediate": "Nivel Upper-Intermediate",
-    
+
     // Contact
     "contact.title": "Trabajemos Juntos",
     "contact.subtitle": "Estoy parcialmente disponible para proyectos de consultoría, colaboraciones y oportunidades interesantes (actualmente trabajo fulltime).",
@@ -83,7 +85,7 @@ const translations = {
     "nav.experience": "Experience",
     "nav.workTogether": "Let's Work Together",
     "nav.viewCV": "View CV",
-    
+
     // Hero
     "hero.available": "Partially available for consulting",
     "hero.headline.part1": "Building High-Performance Tech Teams",
@@ -91,7 +93,7 @@ const translations = {
     "hero.subheadline": "CTO specialized in scaling startups. Transforming business vision into engineering reality.",
     "hero.downloadCV": "Download CV",
     "hero.viewGithub": "View GitHub",
-    
+
     // Tech Radar
     "tech.badge": "Tech Radar",
     "tech.title": "Technology Stack",
@@ -103,13 +105,15 @@ const translations = {
     "tech.toolkit.title": "CTO Toolkit",
     "tech.toolkit.subtitle": "Productivity & AI",
     "tech.tools": "tools",
-    
+    "tech.showMore": "Show more",
+    "tech.showLess": "Show less",
+
     // Experience
     "exp.badge": "Career Path",
     "exp.title": "Experience",
     "exp.description": "A track record of leading technical transformations and building teams that deliver.",
     "exp.current": "Current",
-    
+
     // CV Modal
     "cv.title": "Live CV",
     "cv.print": "Print to PDF",
@@ -130,7 +134,7 @@ const translations = {
     "lang.english": "English",
     "lang.native": "Native language",
     "lang.upperIntermediate": "Upper-Intermediate Level",
-    
+
     // Contact
     "contact.title": "Let's Work Together",
     "contact.subtitle": "I have limited time available for consulting projects, collaborations, and interesting opportunities (currently working fulltime).",
