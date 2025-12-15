@@ -41,27 +41,16 @@ const TechCategory = ({ title, subtitle, items, variant, toolsLabel, showAll, ma
   const displayItems = hasMoreThanMax && !showAll ? items.slice(0, maxItems) : items;
 
   const variantStyles = {
-    production: "border-primary/30 hover:border-primary/60",
-    experimental: "border-accent/30 hover:border-accent/60",
-    toolkit: "border-muted-foreground/30 hover:border-muted-foreground/60",
-  };
-
-  const badgeVariants = {
-    production: "bg-primary/20 text-primary border-primary/30",
-    experimental: "bg-accent/20 text-accent border-accent/30",
-    toolkit: "bg-muted text-muted-foreground border-border",
+    production: "border-l-2 border-l-primary/30 hover:border-l-primary/60",
+    experimental: "border-l-2 border-l-accent/30 hover:border-l-accent/60",
+    toolkit: "border-l-2 border-l-muted-foreground/30 hover:border-l-muted-foreground/60",
   };
 
   return (
-    <div className={`bento-item ${variantStyles[variant]} flex flex-col ${!showAll ? 'h-full' : ''}`}>
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h3 className="text-lg font-semibold text-foreground">{title}</h3>
-          <p className="text-sm text-muted-foreground">{subtitle}</p>
-        </div>
-        <Badge className={`${badgeVariants[variant]} border font-mono text-xs`}>
-          {items.length} {toolsLabel}
-        </Badge>
+    <div className={`bento-item border-0 ${variantStyles[variant]} flex flex-col ${!showAll ? 'h-full' : ''}`}>
+      <div className="mb-4">
+        <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+        <p className="text-sm text-muted-foreground">{subtitle}</p>
       </div>
       <div className={`grid grid-cols-1 gap-3 ${!showAll ? 'flex-1' : ''}`}>
         {displayItems.map((item) => {
@@ -93,14 +82,14 @@ const TechRadar = () => {
   const maxItems = 3;
 
   // Check if any category has more than maxItems
-  const hasMoreItems = 
+  const hasMoreItems =
     techStack.production.items.length > maxItems ||
     techStack.experimental.items.length > maxItems ||
     techStack.toolkit.items.length > maxItems;
 
   return (
     <section id="tech-stack" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
         <div className="text-center mb-16">
           <Badge className="bg-secondary text-muted-foreground border-border mb-4">
@@ -115,39 +104,41 @@ const TechRadar = () => {
         </div>
 
         {/* Bento Grid */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ${!showAll ? 'items-stretch' : 'items-start'}`}>
-          <div className="flex">
-            <TechCategory
-              title={techStack.production.title[language as keyof typeof techStack.production.title]}
-              subtitle={techStack.production.subtitle[language as keyof typeof techStack.production.subtitle]}
-              items={techStack.production.items}
-              variant="production"
-              toolsLabel={t("tech.tools")}
-              showAll={showAll}
-              maxItems={maxItems}
-            />
-          </div>
-          <div className="flex">
-            <TechCategory
-              title={techStack.experimental.title[language as keyof typeof techStack.experimental.title]}
-              subtitle={techStack.experimental.subtitle[language as keyof typeof techStack.experimental.subtitle]}
-              items={techStack.experimental.items}
-              variant="experimental"
-              toolsLabel={t("tech.tools")}
-              showAll={showAll}
-              maxItems={maxItems}
-            />
-          </div>
-          <div className="md:col-span-2 lg:col-span-1 flex">
-            <TechCategory
-              title={techStack.toolkit.title[language as keyof typeof techStack.toolkit.title]}
-              subtitle={techStack.toolkit.subtitle[language as keyof typeof techStack.toolkit.subtitle]}
-              items={techStack.toolkit.items}
-              variant="toolkit"
-              toolsLabel={t("tech.tools")}
-              showAll={showAll}
-              maxItems={maxItems}
-            />
+        <div className={`overflow-hidden`}>
+          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3`}>
+            <div className="mr-2 last:mr-0">
+              <TechCategory
+                title={techStack.production.title[language as keyof typeof techStack.production.title]}
+                subtitle={techStack.production.subtitle[language as keyof typeof techStack.production.subtitle]}
+                items={techStack.production.items}
+                variant="production"
+                toolsLabel={t("tech.tools")}
+                showAll={showAll}
+                maxItems={maxItems}
+              />
+            </div>
+            <div className="mr-2 last:mr-0">
+              <TechCategory
+                title={techStack.experimental.title[language as keyof typeof techStack.experimental.title]}
+                subtitle={techStack.experimental.subtitle[language as keyof typeof techStack.experimental.subtitle]}
+                items={techStack.experimental.items}
+                variant="experimental"
+                toolsLabel={t("tech.tools")}
+                showAll={showAll}
+                maxItems={maxItems}
+              />
+            </div>
+            <div className="mr-2 last:mr-0">
+              <TechCategory
+                title={techStack.toolkit.title[language as keyof typeof techStack.toolkit.title]}
+                subtitle={techStack.toolkit.subtitle[language as keyof typeof techStack.toolkit.subtitle]}
+                items={techStack.toolkit.items}
+                variant="toolkit"
+                toolsLabel={t("tech.tools")}
+                showAll={showAll}
+                maxItems={maxItems}
+              />
+            </div>
           </div>
         </div>
 
