@@ -3,6 +3,14 @@ import { Briefcase, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import cvData from "@/data/cvData.json";
 
+// Mapeo de nombres de empresas a sus logos
+const companyLogos: Record<string, string> = {
+  "Lifebox": "/logos/Lifebox logo.png",
+  "Toku": "/logos/Toku logo.png",
+  "Total Abogados": "/logos/Total Abogados logo.jpeg",
+  "Amipass": "/logos/Amipass logo.png",
+};
+
 const ExperienceTimeline = () => {
   const { language, t } = useLanguage();
   const { experience } = cvData;
@@ -37,6 +45,23 @@ const ExperienceTimeline = () => {
             >
               {/* Timeline dot */}
               <div className="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-card border-2 border-primary md:-translate-x-1/2 z-10 shadow-glow" />
+
+              {/* Logo in empty space - left side for even, right side for odd */}
+              <div className="hidden md:flex flex-1 items-center justify-center">
+                {companyLogos[exp.company] && (
+                  <img
+                    src={companyLogos[exp.company]}
+                    alt={`${exp.company} logo`}
+                    className={`w-auto object-contain opacity-60 hover:opacity-100 transition-opacity ${
+                      exp.company === "Toku" || exp.company === "Amipass"
+                        ? "h-[60px]"
+                        : exp.company === "Lifebox"
+                        ? "h-[110px]"
+                        : "h-24"
+                    }`}
+                  />
+                )}
+              </div>
 
               {/* Content */}
               <div className={`flex-1 ml-8 md:ml-0 ${index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
@@ -78,9 +103,6 @@ const ExperienceTimeline = () => {
                   </p>
                 </div>
               </div>
-
-              {/* Spacer for alternating layout */}
-              <div className="hidden md:block flex-1" />
             </div>
           ))}
         </div>
