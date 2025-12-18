@@ -57,14 +57,14 @@ const translations = {
     "hero.available": "Disponible parcialmente",
     "hero.headline.part1": "Construyendo Equipos Tech de Alto Rendimiento",
     "hero.headline.part2": "& Arquitecturas Escalables.",
-    "hero.subheadline": "CTO especializado en escalar startups. Transformando visión de negocio en realidad de ingeniería.",
+    "hero.subheadline": "Hola 👋, mi nombre es Felipe, CTO y Software Engineer, especialista en construir equipos tech de alto rendimiento y productos tecnológicos para startups.",
     "hero.viewExperience": "Experiencia",
     "hero.viewCV": "CV",
 
     // Tech Radar
     "tech.badge": "Tech Radar",
     "tech.title": "Stack Tecnológico",
-    "tech.description": "Una colección curada de herramientas y tecnologías que uso para construir sistemas escalables y liderar equipos de alto rendimiento.",
+    "tech.description": "Una colección de herramientas y tecnologías que uso para construir productos tecnológicos para startups.",
     "tech.production.title": "Stack de Producción",
     "tech.production.subtitle": "Expertise Actual",
     "tech.experimental.title": "Laboratorio Experimental",
@@ -78,7 +78,7 @@ const translations = {
     // Experience
     "exp.badge": "Trayectoria",
     "exp.title": "Experiencia",
-    "exp.description": "Un historial de liderazgo en transformaciones tecnológicas y construcción de equipos que entregan resultados.",
+    "exp.description": "Un historial de liderazgo y desarrollo de productos tecnológicos para startups de alto rendimiento.",
     "exp.current": "Actual",
 
     // CV Modal

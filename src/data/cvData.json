@@ -3,16 +3,16 @@
     "name": "Felipe Andrés Gómez Quezada",
     "shortName": "Felipe Gómez Quezada",
     "title": {
-      "es": "Chief Technology Officer",
-      "en": "Chief Technology Officer"
+      "es": "Chief Technology Officer & Software Engineer",
+      "en": "Chief Technology Officer & Software Engineer"
     },
     "headline": {
       "es": "Construyendo Equipos Tech de Alto Rendimiento & Arquitecturas Escalables.",
       "en": "Building High-Performance Tech Teams & Scalable Architectures."
     },
     "subheadline": {
-      "es": "CTO especializado en escalar startups. Transformando visión de negocio en realidad de ingeniería.",
-      "en": "CTO specialized in scaling startups. Transforming business vision into engineering reality."
+      "es": "¡Hola 👋! Mi nombre es Felipe, CTO y Software Engineer. Soy especialista en construir equipos tech de alto rendimiento y productos tecnológicos para startups.",
+      "en": "Hello 👋! My name is Felipe, CTO and Software Engineer. I'm specialized in building high-performance tech teams and scalable products for startups."
     },
     "location": "Santiago, Chile",
     "email": "felipe.gomez.quezada@gmail.com",
@@ -52,8 +52,8 @@
       "period": "2023 - 2024",
       "periodEn": "2023 - 2024",
       "focus": {
-        "es": "Digital Factory y desarrollo de productos",
-        "en": "Digital Factory and product development"
+        "es": "Desarrollo y creación de la Digital Factory",
+        "en": "Development and creation of the Digital Factory"
       },
       "description": {
         "es": "Expandir funcionalidades de productos tecnológicos internos, colaborar en el desarrollo de nuevos productos, planificar futuros proyectos tecnológicos, crear y consolidar la Digital Factory.",
@@ -64,7 +64,7 @@
     {
       "id": 3,
       "role": {
-        "es": "Ingeniero de Software",
+        "es": "Software Engineer",
         "en": "Software Engineer"
       },
       "company": "Toku",
@@ -83,15 +83,15 @@
     {
       "id": 4,
       "role": {
-        "es": "Ingeniero de Software",
+        "es": "Software Engineer",
         "en": "Software Engineer"
       },
       "company": "Total Abogados",
       "period": "2022",
       "periodEn": "2022",
       "focus": {
-        "es": "Backend y Portal de Pagos",
-        "en": "Backend and Payment Portal"
+        "es": "Full Stack y Portal de Pagos",
+        "en": "Full Stack and Payment Portal"
       },
       "description": {
         "es": "Desarrollo de aplicaciones en Python, Angular, MongoDB, Docker. Diseño y desarrollo de Portal de Pagos usando Python y Flask.",
@@ -102,7 +102,7 @@
     {
       "id": 5,
       "role": {
-        "es": "Analista de Business Intelligence",
+        "es": "Business Intelligence Analyst",
         "en": "Business Intelligence Analyst"
       },
       "company": "Amipass",
