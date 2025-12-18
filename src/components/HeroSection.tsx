@@ -80,6 +80,7 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
               >
                 <FileText className="mr-2 h-4 w-4" />
                 {t("hero.viewCV")}
+                <span className="ml-2 text-base">{language === 'es' ? '🇪🇸' : '🇺🇸'}</span>
               </Button>
             </div>
 

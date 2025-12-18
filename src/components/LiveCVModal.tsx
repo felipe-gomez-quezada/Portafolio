@@ -134,6 +134,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
               >
                 <Download className="h-4 w-4 mr-2" />
                 {t("cv.print")}
+                <span className="ml-2 text-sm">{language === 'es' ? '🇪🇸' : '🇺🇸'}</span>
               </Button>
               <Button 
                 variant="ghost" 

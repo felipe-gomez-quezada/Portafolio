@@ -13,7 +13,7 @@ interface NavigationProps {
 const Navigation = ({ onOpenCV }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -97,6 +97,7 @@ const Navigation = ({ onOpenCV }: NavigationProps) => {
             >
               <FileText className="h-4 w-4 mr-2" />
               {t("nav.viewCV")}
+              <span className="ml-2 text-sm">{language === 'es' ? '🇪🇸' : '🇺🇸'}</span>
             </Button>
           </div>
 
@@ -152,6 +153,7 @@ const Navigation = ({ onOpenCV }: NavigationProps) => {
               >
                 <FileText className="h-4 w-4 mr-2" />
                 {t("nav.viewCV")}
+                <span className="ml-2 text-sm">{language === 'es' ? '🇪🇸' : '🇺🇸'}</span>
               </Button>
             </div>
           </div>
