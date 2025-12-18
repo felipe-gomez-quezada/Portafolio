@@ -34,7 +34,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
       });
 
       const imgData = canvas.toDataURL('image/png');
-      
+
       // Calcular dimensiones del PDF (A4)
       const pdf = new jsPDF('p', 'mm', 'a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -49,7 +49,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
       // El texto será invisible pero presente para los sistemas ATS
       pdf.setFontSize(8);
       pdf.setTextColor(255, 255, 255); // Texto blanco (invisible sobre fondo blanco pero presente en el PDF)
-      
+
       // Construir todo el texto del CV
       let fullText = `${personal.name}\n`;
       fullText += `${personal.title[language as keyof typeof personal.title]}\n`;
@@ -87,7 +87,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
         fullText += `${cert.name} | ${cert.issuer} | ${cert.date}\n`;
         fullText += `${cert.description[language as keyof typeof cert.description]}\n\n`;
       });
-      
+
       // Agregar texto invisible al final del PDF (fuera del área visible pero presente)
       const textLines = fullText.split('\n');
       textLines.forEach((line, index) => {
@@ -102,7 +102,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
         title: `${personal.name} - CV`,
         subject: 'Curriculum Vitae',
         author: personal.name,
-        keywords: skills[language as keyof typeof skills].join(', ') + ', ' + 
+        keywords: skills[language as keyof typeof skills].join(', ') + ', ' +
                  techStack.production.items.map(i => i.name).join(', '),
         creator: 'Portfolio Website'
       });
@@ -126,9 +126,9 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
           <div className="flex items-center justify-between mb-6 no-print">
             <h2 className="text-2xl font-bold text-foreground">{t("cv.title")}</h2>
             <div className="flex items-center gap-2">
-              <Button 
-                variant="outline" 
-                size="sm" 
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={handleDownloadPDF}
                 className="border-border/50 hover:border-primary/50"
               >
@@ -136,9 +136,9 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                 {t("cv.print")}
                 <span className="ml-2 text-sm">{language === 'es' ? '🇪🇸' : '🇺🇸'}</span>
               </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={onClose}
                 className="hover:bg-destructive/10 hover:text-destructive"
               >
@@ -173,18 +173,18 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                     <span>{personal.email}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <a 
-                      href={personal.links.linkedin} 
-                      target="_blank" 
+                    <a
+                      href={personal.links.linkedin}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
                     >
                       <Linkedin className="h-4 w-4" />
                       <span className="text-xs">LinkedIn</span>
                     </a>
-                    <a 
-                      href={personal.links.github} 
-                      target="_blank" 
+                    <a
+                      href={personal.links.github}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
                     >
@@ -263,9 +263,9 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                   <h2 className="text-lg font-bold text-foreground mb-4">{t("cv.coreCompetencies")}</h2>
                   <div className="flex flex-wrap gap-2">
                     {skills[language as keyof typeof skills].map((skill) => (
-                      <Badge 
-                        key={skill} 
-                        variant="outline" 
+                      <Badge
+                        key={skill}
+                        variant="outline"
                         className="border-primary/30 text-foreground hover:bg-primary/10 transition-colors"
                       >
                         {skill}
@@ -279,7 +279,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                 {/* Tech Stack */}
                 <div>
                   <h2 className="text-lg font-bold text-foreground mb-4">{t("cv.technicalStack")}</h2>
-                  
+
                   <div className="space-y-4">
                     <div>
                       <p className="text-xs font-medium text-primary mb-2">

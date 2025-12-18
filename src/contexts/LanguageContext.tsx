@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Language = 'es' | 'en';
 
@@ -7,6 +7,43 @@ interface LanguageContextType {
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
 }
+
+// Función para detectar el idioma del navegador
+const detectBrowserLanguage = (): Language => {
+  // Primero, verificar si hay una preferencia guardada en localStorage
+  const savedLanguage = localStorage.getItem('preferred-language') as Language | null;
+  if (savedLanguage === 'es' || savedLanguage === 'en') {
+    return savedLanguage;
+  }
+
+  // Si no hay preferencia guardada, detectar del navegador
+  if (typeof window !== 'undefined' && navigator.language) {
+    const browserLang = navigator.language.toLowerCase();
+    // Verificar si el idioma del navegador es inglés
+    if (browserLang.startsWith('en')) {
+      return 'en';
+    }
+    // Verificar si el idioma del navegador es español
+    if (browserLang.startsWith('es')) {
+      return 'es';
+    }
+    // Verificar en la lista de idiomas preferidos del navegador
+    if (navigator.languages) {
+      for (const lang of navigator.languages) {
+        const langLower = lang.toLowerCase();
+        if (langLower.startsWith('en')) {
+          return 'en';
+        }
+        if (langLower.startsWith('es')) {
+          return 'es';
+        }
+      }
+    }
+  }
+
+  // Fallback a español por defecto
+  return 'es';
+};
 
 const translations = {
   es: {
@@ -154,14 +191,25 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>('es');
+  const [language, setLanguage] = useState<Language>(() => detectBrowserLanguage());
+
+  // Guardar la preferencia en localStorage cuando cambie el idioma
+  useEffect(() => {
+    localStorage.setItem('preferred-language', language);
+  }, [language]);
+
+  // Función para cambiar el idioma que también guarda en localStorage
+  const handleSetLanguage = (lang: Language) => {
+    setLanguage(lang);
+    localStorage.setItem('preferred-language', lang);
+  };
 
   const t = (key: string): string => {
     return translations[language][key as keyof typeof translations['es']] || key;
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );

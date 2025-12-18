@@ -32,7 +32,7 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
           {/* Left Column - Content */}
           <div className="text-left space-y-6">
             {/* Badge */}
-            <Link 
+            <Link
               to="/contacto"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-pointer group animate-fade-in"
             >
@@ -61,8 +61,8 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-start gap-4 pt-2 animate-fade-in animation-delay-800">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="group bg-primary text-primary-foreground hover:bg-primary/90 px-8 h-12 font-semibold"
                 asChild
               >
@@ -72,9 +72,9 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
+              <Button
+                variant="outline"
+                size="lg"
                 className="group border-border/50 hover:border-primary/50 hover:bg-primary/5 px-8 h-12"
                 onClick={onOpenCV}
               >
@@ -86,17 +86,17 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
 
             {/* Social Links */}
             <div className="flex items-center gap-4 pt-2 animate-fade-in animation-delay-800">
-              <a 
-                href={personal.links.linkedin} 
-                target="_blank" 
+              <a
+                href={personal.links.linkedin}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
               >
                 <Linkedin className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors" />
               </a>
-              <a 
-                href={personal.links.github} 
-                target="_blank" 
+              <a
+                href={personal.links.github}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
               >
@@ -107,7 +107,7 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
 
           {/* Right Column - Profile Image */}
           <div className="flex justify-center md:justify-end animate-fade-in animation-delay-400">
-            <ParticleEffect 
+            <ParticleEffect
               className="relative w-64 h-64 md:w-80 md:h-80"
               particleCount={40}
             >
