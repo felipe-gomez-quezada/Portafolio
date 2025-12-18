@@ -2,6 +2,7 @@ import { Github, Linkedin, Heart, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import cvData from "@/data/cvData.json";
+import VisitCounter from "@/components/VisitCounter";
 
 const Footer = () => {
   const { language, t } = useLanguage();
@@ -47,7 +48,8 @@ const Footer = () => {
 
           {/* Right side */}
           <div className="flex flex-col items-center md:items-end gap-2">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 flex-wrap justify-center md:justify-end">
+              <VisitCounter />
               <p className="text-sm text-muted-foreground flex items-center gap-1">
                 {t("footer.builtWith")} <Heart className="h-4 w-4 text-destructive fill-destructive" /> {t("footer.and")}
               </p>

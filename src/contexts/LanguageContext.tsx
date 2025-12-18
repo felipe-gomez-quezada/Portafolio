@@ -95,6 +95,8 @@ const translations = {
     "footer.builtWith": "Construido con",
     "footer.and": "y React",
     "footer.rights": "Todos los derechos reservados.",
+    "footer.visits": "Visitas:",
+    "footer.loadingVisits": "Cargando...",
 
     // Languages
     "lang.spanish": "Español",
@@ -165,6 +167,8 @@ const translations = {
     "footer.builtWith": "Built with",
     "footer.and": "and React",
     "footer.rights": "All rights reserved.",
+    "footer.visits": "Visits:",
+    "footer.loadingVisits": "Loading...",
 
     // Languages
     "lang.spanish": "Spanish",
