@@ -1,4 +1,4 @@
-import { Download, Github, Linkedin, ArrowRight } from "lucide-react";
+import { Briefcase, FileText, Linkedin, ArrowRight, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
@@ -64,22 +64,22 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
               <Button 
                 size="lg" 
                 className="group bg-primary text-primary-foreground hover:bg-primary/90 px-8 h-12 font-semibold"
-                onClick={onOpenCV}
+                asChild
               >
-                <Download className="mr-2 h-4 w-4" />
-                {t("hero.downloadCV")}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <a href="#experience">
+                  <Briefcase className="mr-2 h-4 w-4" />
+                  {t("hero.viewExperience")}
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
                 className="group border-border/50 hover:border-primary/50 hover:bg-primary/5 px-8 h-12"
-                asChild
+                onClick={onOpenCV}
               >
-                <a href={personal.links.github} target="_blank" rel="noopener noreferrer">
-                  <Github className="mr-2 h-4 w-4" />
-                  {t("hero.viewGithub")}
-                </a>
+                <FileText className="mr-2 h-4 w-4" />
+                {t("hero.viewCV")}
               </Button>
             </div>
 

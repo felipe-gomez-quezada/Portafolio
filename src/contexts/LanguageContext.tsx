@@ -14,15 +14,15 @@ const translations = {
     "nav.techStack": "Stack Tecnológico",
     "nav.experience": "Experiencia",
     "nav.workTogether": "Trabajemos Juntos",
-    "nav.viewCV": "Ver CV",
+    "nav.viewCV": "CV",
 
     // Hero
     "hero.available": "Disponible parcialmente",
     "hero.headline.part1": "Construyendo Equipos Tech de Alto Rendimiento",
     "hero.headline.part2": "& Arquitecturas Escalables.",
     "hero.subheadline": "CTO especializado en escalar startups. Transformando visión de negocio en realidad de ingeniería.",
-    "hero.downloadCV": "Descargar CV",
-    "hero.viewGithub": "Ver GitHub",
+    "hero.viewExperience": "Experiencia",
+    "hero.viewCV": "CV",
 
     // Tech Radar
     "tech.badge": "Tech Radar",
@@ -91,8 +91,8 @@ const translations = {
     "hero.headline.part1": "Building High-Performance Tech Teams",
     "hero.headline.part2": "& Scalable Architectures.",
     "hero.subheadline": "CTO specialized in scaling startups. Transforming business vision into engineering reality.",
-    "hero.downloadCV": "Download CV",
-    "hero.viewGithub": "View GitHub",
+    "hero.viewExperience": "Experience",
+    "hero.viewCV": "CV",
 
     // Tech Radar
     "tech.badge": "Tech Radar",
