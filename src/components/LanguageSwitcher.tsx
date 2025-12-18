@@ -8,13 +8,13 @@ const LanguageSwitcher = () => {
     setLanguage(language === 'es' ? 'en' : 'es');
   };
 
-  const flag = language === 'es' ? '🇪🇸' : '🇺🇸';
-  const label = language === 'es' ? 'Español' : 'English';
+  const flag = language === 'es' ? '🇨🇱' : '🇺🇸';
+  const label = language === 'es' ? 'Español (CL)' : 'English (US)';
 
   return (
-    <Button 
-      variant="ghost" 
-      size="sm" 
+    <Button
+      variant="ghost"
+      size="sm"
       onClick={toggleLanguage}
       className="gap-2 text-muted-foreground hover:text-foreground"
     >

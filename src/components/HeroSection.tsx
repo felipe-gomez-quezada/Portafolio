@@ -72,15 +72,14 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
+              <Button 
+                variant="outline" 
+                size="lg" 
                 className="group border-border/50 hover:border-primary/50 hover:bg-primary/5 px-8 h-12"
                 onClick={onOpenCV}
               >
                 <FileText className="mr-2 h-4 w-4" />
                 {t("hero.viewCV")}
-                <span className="ml-2 text-base">{language === 'es' ? '🇪🇸' : '🇺🇸'}</span>
               </Button>
             </div>
 

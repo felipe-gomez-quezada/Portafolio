@@ -121,7 +121,7 @@ const translations = {
     "nav.techStack": "Tech Stack",
     "nav.experience": "Experience",
     "nav.workTogether": "Let's Work Together",
-    "nav.viewCV": "View CV",
+    "nav.viewCV": "CV",
 
     // Hero
     "hero.available": "Partially available for consulting",
