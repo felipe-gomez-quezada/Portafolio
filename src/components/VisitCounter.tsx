@@ -1,11 +1,22 @@
 import { useEffect, useState, useRef } from "react";
 import { Eye } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Counter } from "counterapi";
 
-// Configuración de CountAPI (servicio gratuito de contadores)
-const COUNT_API_NAMESPACE = "felipe-gomez-portfolio";
-const COUNT_API_KEY = "visits";
-const SESSION_STORAGE_KEY = "visit_counted";
+// Configuración de CounterAPI
+const COUNTER_WORKSPACE = "felipe-gomez-quezadas-team-2177";
+const COUNTER_NAME = "felipe-gomez-portfolio";
+const SESSION_STORAGE_KEY = "up_count";
+
+// Crear instancia del contador
+const counter = new Counter({ workspace: COUNTER_WORKSPACE });
+
+// Interfaz para la respuesta de CounterAPI que incluye up_count
+interface CounterAPIResponse {
+  value?: number;
+  up_count?: number;
+  [key: string]: unknown;
+}
 
 interface VisitCounterProps {
   className?: string;
@@ -25,16 +36,11 @@ const VisitCounter = ({ className }: VisitCounterProps) => {
       if (hasCountedRef.current || sessionStorage.getItem(SESSION_STORAGE_KEY)) {
         // Solo obtenemos el contador sin incrementar
         try {
-          const getResponse = await fetch(
-            `https://api.countapi.xyz/get/${COUNT_API_NAMESPACE}/${COUNT_API_KEY}`
-          );
-          
-          if (getResponse.ok) {
-            const getData = await getResponse.json();
-            const currentCount = getData.value || 0;
-            setCount(currentCount);
-            animateCount(0, currentCount);
-          }
+          const result = await counter.get(COUNTER_NAME);
+          // CounterAPI retorna up_count en lugar de value
+          const currentCount = result.data?.up_count ?? 0;
+          setCount(currentCount);
+          animateCount(0, currentCount);
         } catch (error) {
           console.error("Error fetching visit count:", error);
           setCount(0);
@@ -43,48 +49,39 @@ const VisitCounter = ({ className }: VisitCounterProps) => {
       }
 
       try {
-        // Primero obtenemos el contador actual
-        const getResponse = await fetch(
-          `https://api.countapi.xyz/get/${COUNT_API_NAMESPACE}/${COUNT_API_KEY}`
-        );
-        
-        let currentCount = 0;
-        
-        if (getResponse.ok) {
-          const getData = await getResponse.json();
-          currentCount = getData.value || 0;
+        // Incrementamos el contador directamente (solo una vez por sesión)
+        // Si no existe, up() lo creará automáticamente
+        const upResult = await counter.up(COUNTER_NAME);
+        console.log("Up result:", upResult);
+        // CounterAPI retorna up_count en lugar de value
+        const newCount = upResult?.data?.up_count ?? 0;
+
+        // Marcar que ya contamos esta sesión
+        hasCountedRef.current = true;
+        sessionStorage.setItem(SESSION_STORAGE_KEY, "true");
+
+        // Mostrar el nuevo valor con animación
+        setIsAnimating(true);
+        setCount(newCount);
+        animateCount(0, newCount);
+
+        // Removemos la animación después de que termine
+        setTimeout(() => {
+          setIsAnimating(false);
+        }, 800);
+      } catch (error) {
+        console.error("Error incrementing visit count:", error);
+        // En caso de error, intentar obtener el valor actual
+        try {
+          const getResult = await counter.get(COUNTER_NAME);
+          // CounterAPI retorna up_count en lugar de value
+          const currentCount = getResult?.data?.up_count ?? 0;
           setCount(currentCount);
           animateCount(0, currentCount);
+        } catch (getError) {
+          console.error("Error fetching visit count:", getError);
+          setCount(0);
         }
-
-        // Luego incrementamos el contador (solo una vez por sesión)
-        const hitResponse = await fetch(
-          `https://api.countapi.xyz/hit/${COUNT_API_NAMESPACE}/${COUNT_API_KEY}`
-        );
-
-        if (hitResponse.ok) {
-          const hitData = await hitResponse.json();
-          const newCount = hitData.value;
-          
-          // Marcar que ya contamos esta sesión
-          hasCountedRef.current = true;
-          sessionStorage.setItem(SESSION_STORAGE_KEY, "true");
-
-          // Si el número aumentó, activamos la animación
-          if (newCount > currentCount) {
-            setIsAnimating(true);
-            setCount(newCount);
-            animateCount(currentCount, newCount);
-            
-            // Removemos la animación después de que termine
-            setTimeout(() => {
-              setIsAnimating(false);
-            }, 800);
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching visit count:", error);
-        setCount(0);
       }
     };
 
@@ -104,10 +101,10 @@ const VisitCounter = ({ className }: VisitCounterProps) => {
       const now = Date.now();
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
+
       // Easing function (ease-out)
       const easeOut = 1 - Math.pow(1 - progress, 3);
-      
+
       const current = Math.floor(start + (end - start) * easeOut);
       setDisplayCount(current);
 
@@ -147,10 +144,10 @@ const VisitCounter = ({ className }: VisitCounterProps) => {
 
   return (
     <div className={`flex items-center gap-2 ${className || ''}`}>
-      <Eye 
+      <Eye
         className={`h-4 w-4 text-primary transition-all duration-300 ${
           isAnimating ? 'animate-pulse scale-110' : ''
-        }`} 
+        }`}
       />
       <div className="flex items-baseline gap-1">
         <span className="text-xs text-muted-foreground">{t("footer.visits")}</span>
