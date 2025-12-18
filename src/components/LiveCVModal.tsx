@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import cvData from "@/data/cvData.json";
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -126,6 +127,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
           <div className="flex items-center justify-between mb-6 no-print">
             <h2 className="text-2xl font-bold text-foreground">{t("cv.title")}</h2>
             <div className="flex items-center gap-2">
+              <LanguageSwitcher />
               <Button
                 variant="outline"
                 size="sm"
