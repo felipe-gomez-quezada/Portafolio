@@ -294,7 +294,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
   return (
     <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm overflow-y-auto no-print">
       <div className="min-h-screen py-8 px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="w-full max-w-[210mm] mx-auto">
           {/* Modal Header - Hidden on print */}
           <div className="flex items-center justify-between mb-6 no-print">
             <h2 className="text-2xl font-bold text-foreground">{t("cv.title")}</h2>
@@ -304,10 +304,22 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                 variant="outline"
                 size="sm"
                 onClick={handleDownloadPDF}
-                className="border-border/50 hover:border-primary/50"
+                title={t("cv.atsDownloadTitle")}
+                aria-label={`${t("cv.atsDownloadPrimary")}. ${t("cv.atsDownloadSecondary")}. ${t("cv.atsDownloadTitle")}`}
+                className="group border-border/50 hover:border-primary/50 focus-visible:border-primary/50 focus-visible:bg-accent h-auto min-h-9 gap-2 py-2 px-3 focus-visible:text-accent-foreground"
               >
-                <Download className="h-4 w-4 mr-2" />
-                {t("cv.print")}
+                <Download
+                  className="h-4 w-4 shrink-0 self-center text-foreground transition-colors group-hover:text-accent-foreground group-focus-visible:text-accent-foreground"
+                  aria-hidden
+                />
+                <span className="flex flex-col items-start text-left leading-tight">
+                  <span className="text-sm font-medium transition-colors group-hover:text-accent-foreground group-focus-visible:text-accent-foreground">
+                    {t("cv.atsDownloadPrimary")}
+                  </span>
+                  <span className="text-[10px] font-normal text-muted-foreground transition-colors group-hover:text-accent-foreground group-focus-visible:text-accent-foreground">
+                    {t("cv.atsDownloadSecondary")}
+                  </span>
+                </span>
               </Button>
               <Button
                 variant="ghost"
@@ -373,7 +385,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
             {/* CV Body: flex en impresión (index.css) mantiene borde lateral y fondo gris a toda la altura */}
             <div className="cv-body flex flex-col gap-8 p-8 md:flex-row md:items-stretch md:gap-0">
               {/* Main Column - Experience */}
-              <div className="min-w-0 space-y-8 md:flex-[2] md:pr-8">
+              <div className="min-w-0 space-y-8 md:flex-[2] md:min-w-0 md:pr-6 lg:pr-8">
                 <div>
                   <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                     <Briefcase className="h-5 w-5 text-primary" />
@@ -431,7 +443,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
               </div>
 
               {/* Sidebar: borde vertical y fondo alineados con la altura de la columna principal */}
-              <aside className="min-w-0 space-y-8 border-t border-border pt-8 md:flex-1 md:border-l md:border-t-0 md:border-border md:bg-muted/50 md:pl-8 md:pt-0">
+              <aside className="min-w-0 space-y-8 border-t border-border pt-8 md:flex-1 md:min-w-0 md:border-l md:border-t-0 md:border-border md:bg-muted/50 md:pl-6 md:pr-5 md:pt-0 lg:pl-7 lg:pr-6">
                 {/* Skills */}
                 <div>
                   <h2 className="text-lg font-bold text-foreground mb-4">{t("cv.coreCompetencies")}</h2>
@@ -449,7 +461,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                   </div>
                 </div>
 
-                <Separator />
+                <Separator className="mx-auto h-px !w-[calc(100%-0.75rem)] max-w-full bg-border" />
 
                 {/* Tech Stack */}
                 <div>
@@ -484,7 +496,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                   </div>
                 </div>
 
-                <Separator />
+                <Separator className="mx-auto h-px !w-[calc(100%-0.75rem)] max-w-full bg-border" />
 
                 {/* Languages */}
                 <div>
@@ -492,13 +504,16 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                     <Languages className="h-4 w-4 text-primary" />
                     {t("cv.languages")}
                   </h2>
-                  <div className="space-y-2">
+                  <div className="space-y-2.5">
                     {languagesData.map((lang, index) => (
-                      <div key={index} className="flex justify-between text-sm">
-                        <span className="text-foreground">
+                      <div
+                        key={index}
+                        className="grid grid-cols-[minmax(0,auto)_minmax(0,1fr)] gap-x-3 gap-y-0.5 items-baseline text-sm"
+                      >
+                        <span className="text-foreground shrink-0">
                           {lang.language[language as keyof typeof lang.language]}
                         </span>
-                        <span className="text-muted-foreground">
+                        <span className="min-w-0 text-muted-foreground text-right leading-snug pl-1">
                           {lang.level[language as keyof typeof lang.level]}
                         </span>
                       </div>
@@ -506,7 +521,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                   </div>
                 </div>
 
-                <Separator />
+                <Separator className="mx-auto h-px !w-[calc(100%-0.75rem)] max-w-full bg-border" />
 
                 {/* Certifications */}
                 <div>
