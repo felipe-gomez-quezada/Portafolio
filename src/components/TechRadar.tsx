@@ -1,5 +1,24 @@
 import { useState } from "react";
-import { Code2, Layers, Server, Cloud, Zap, Sparkles, Triangle, Database, Bot, BookOpen, Mail, Box, LucideIcon, ChevronDown, ChevronUp } from "lucide-react";
+import {
+  Code2,
+  Layers,
+  Server,
+  Cloud,
+  Zap,
+  Sparkles,
+  Triangle,
+  Database,
+  Bot,
+  BookOpen,
+  Mail,
+  Box,
+  Brain,
+  Braces,
+  StickyNote,
+  LucideIcon,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -17,6 +36,9 @@ const iconMap: Record<string, LucideIcon> = {
   Bot,
   BookOpen,
   Mail,
+  Brain,
+  Braces,
+  StickyNote,
   Container: Box,
 };
 
