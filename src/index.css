@@ -268,11 +268,16 @@
     page-break-after: avoid !important;
   }
 
-  /* Asegurar que todas las secciones se muestren */
+  /* Visibilidad sin forzar display:block: eso rompía grid/flex del cuerpo y acortaba bordes al imprimir */
   .cv-container > * {
-    display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+  }
+
+  .cv-body {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
   }
 }
 

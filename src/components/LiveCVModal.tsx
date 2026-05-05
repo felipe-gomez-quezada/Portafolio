@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { X, Printer, Mail, Linkedin, Github, MapPin, Calendar, Briefcase, GraduationCap, Award, Languages, Download } from "lucide-react";
+import { X, Mail, Linkedin, Github, MapPin, Calendar, Briefcase, GraduationCap, Award, Languages, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -7,7 +6,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import cvData from "@/data/cvData.json";
 import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
 interface LiveCVModalProps {
   isOpen: boolean;
@@ -17,277 +15,278 @@ interface LiveCVModalProps {
 const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
   const { language, t } = useLanguage();
   const { personal, experience, techStack, skills, education, languages: languagesData, certifications } = cvData;
-  const cvContainerRef = useRef<HTMLDivElement>(null);
+  const handleDownloadPDF = () => {
+    const lang = language as 'es' | 'en';
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
 
-  const handlePrint = () => {
-    window.print();
-  };
+    const pW = 210, pH = 297;
+    const mL = 14, mR = 14, mT = 14;
+    const totalW = pW - mL - mR; // 182mm
 
-  // Función auxiliar para convertir HSL a RGB
-  const hslToRgb = (h: number, s: number, l: number): [number, number, number] => {
-    s /= 100;
-    l /= 100;
-    const c = (1 - Math.abs(2 * l - 1)) * s;
-    const x = c * (1 - Math.abs((h / 60) % 2 - 1));
-    const m = l - c / 2;
-    let r = 0, g = 0, b = 0;
-    if (0 <= h && h < 60) {
-      r = c; g = x; b = 0;
-    } else if (60 <= h && h < 120) {
-      r = x; g = c; b = 0;
-    } else if (120 <= h && h < 180) {
-      r = 0; g = c; b = x;
-    } else if (180 <= h && h < 240) {
-      r = 0; g = x; b = c;
-    } else if (240 <= h && h < 300) {
-      r = x; g = 0; b = c;
-    } else if (300 <= h && h < 360) {
-      r = c; g = 0; b = x;
-    }
-    return [Math.round((r + m) * 255), Math.round((g + m) * 255), Math.round((b + m) * 255)];
-  };
+    const rightW = 54;
+    const divGap = 7;
+    const leftW = totalW - rightW - divGap; // 121mm
+    const rightX = mL + leftW + divGap;
 
-  const handleDownloadPDF = async () => {
-    const cvElement = cvContainerRef.current;
-    if (!cvElement) return;
+    const LH = { xs: 3.3, sm: 3.8, md: 4.2, lg: 5.0 };
 
-    try {
-      // Obtener el color de fondo del tema actual
-      const computedStyle = getComputedStyle(document.documentElement);
-      const bgColorHSL = computedStyle.getPropertyValue('--card').trim();
-      let bgColorRGB: [number, number, number] = [15, 23, 42]; // Default dark color
+    type RGB = { r: number; g: number; b: number };
+    const rgb = (r: number, g: number, b: number): RGB => ({ r, g, b });
+    const C = {
+      ink:     rgb(15, 15, 15),
+      heading: rgb(30, 30, 30),
+      body:    rgb(55, 55, 55),
+      sub:     rgb(85, 85, 85),
+      muted:   rgb(115, 115, 115),
+      faint:   rgb(155, 155, 155),
+      rule:    rgb(185, 185, 185),
+      light:   rgb(220, 220, 220),
+    };
 
-      if (bgColorHSL) {
-        const hslValues = bgColorHSL.split(' ').map(v => parseFloat(v));
-        if (hslValues.length >= 3) {
-          bgColorRGB = hslToRgb(hslValues[0], hslValues[1], hslValues[2]);
-        }
+    const applyFill  = (c: RGB) => pdf.setFillColor(c.r, c.g, c.b);
+    const applyDraw  = (c: RGB) => pdf.setDrawColor(c.r, c.g, c.b);
+    const applyText  = (c: RGB) => pdf.setTextColor(c.r, c.g, c.b);
+
+    const font = (size: number, bold = false, color: RGB = C.body) => {
+      pdf.setFontSize(size);
+      pdf.setFont('helvetica', bold ? 'bold' : 'normal');
+      applyText(color);
+    };
+
+    const tw = (str: string, size: number) =>
+      pdf.getStringUnitWidth(str) * size / pdf.internal.scaleFactor;
+
+    const wrap = (str: string, maxW: number) =>
+      pdf.splitTextToSize(str, maxW) as string[];
+
+    const hLine = (x: number, y: number, w: number, color: RGB = C.rule, lw = 0.25) => {
+      applyDraw(color);
+      pdf.setLineWidth(lw);
+      pdf.line(x, y, x + w, y);
+    };
+
+    const section = (x: number, y: number, w: number, title: string): number => {
+      font(7.5, true, C.ink);
+      pdf.text(title.toUpperCase(), x, y);
+      hLine(x, y + 1.8, w, C.rule, 0.4);
+      return y + 6;
+    };
+
+    // ── TOP ACCENT BAR ──
+    applyFill(C.ink);
+    pdf.rect(0, 0, pW, 3.5, 'F');
+
+    // ── HEADER ──
+    let hy = mT + 6;
+
+    font(21, true, C.ink);
+    pdf.text(personal.name, mL, hy);
+    hy += 6.5;
+
+    font(10.5, false, C.sub);
+    pdf.text(personal.title[lang], mL, hy);
+    hy += 5.2;
+
+    // Strip emoji before wrapping — jsPDF Helvetica can't measure emoji width correctly
+    const summaryText = personal.subheadline[lang].replace(/\p{Emoji}/gu, '').replace(/\s{2,}/g, ' ').trim();
+    font(8, false, C.muted);
+    const summaryLines = wrap(summaryText, 100);
+    pdf.text(summaryLines, mL, hy);
+
+    // Contact block (right-aligned)
+    const cx = pW - mR;
+    let cy = mT + 6;
+    const contacts: { label: string; url: string | null }[] = [
+      { label: personal.email,                          url: `mailto:${personal.email}` },
+      { label: personal.phone,                          url: null },
+      { label: personal.location,                       url: null },
+      { label: 'linkedin.com/in/felipegomezquezada',   url: personal.links.linkedin },
+      { label: 'github.com/felipe-gomez-quezada',      url: personal.links.github },
+    ];
+
+    contacts.forEach(item => {
+      font(7.5, false, item.url ? C.sub : C.muted);
+      pdf.text(item.label, cx, cy, { align: 'right' });
+      if (item.url) {
+        const w = tw(item.label, 7.5);
+        pdf.link(cx - w, cy - 3.2, w, 3.8, { url: item.url });
+      }
+      cy += 4.4;
+    });
+
+    const summaryLineMm = 3.55;
+    const summaryBottomY = hy + summaryLines.length * summaryLineMm;
+    const contactsBottomY = cy + 1;
+    const headerBottom = Math.max(mT + 47, summaryBottomY + 9, contactsBottomY + 4);
+    hLine(mL, headerBottom, totalW, C.ink, 0.6);
+
+    // ── BODY ──
+    const bodyY = headerBottom + 7;
+    const footerY = pH - 8;
+    const footerRuleY = footerY - 3;
+    const sidebarTop = bodyY - 4;
+    const sidebarBottomInset = 0.35;
+    const sidebarH = Math.max(0, footerRuleY - sidebarTop - sidebarBottomInset);
+    let lY = bodyY;
+    let rY = bodyY;
+
+    // ── LEFT: EXPERIENCE ──
+    lY = section(mL, lY, leftW, t('cv.professionalExp'));
+
+    experience.forEach((exp, i) => {
+      if (i > 0) {
+        lY += 4;
+        hLine(mL, lY, leftW, C.light, 0.2);
+        lY += 5;
       }
 
-      const bgColorString = `rgb(${bgColorRGB.join(', ')})`;
+      const period = lang === 'es' ? exp.period : exp.periodEn;
 
-      // Esperar un momento para asegurar que todos los estilos estén aplicados
-      await new Promise(resolve => setTimeout(resolve, 100));
+      font(9, true, C.heading);
+      pdf.text(exp.role[lang], mL, lY);
+      font(7.5, false, C.faint);
+      pdf.text(period, mL + leftW, lY, { align: 'right' });
+      lY += LH.md;
 
-      // Capturar el elemento con html2canvas
-      const canvas = await html2canvas(cvElement, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: bgColorString,
-        width: cvElement.scrollWidth,
-        height: cvElement.scrollHeight,
-        windowWidth: cvElement.scrollWidth,
-        windowHeight: cvElement.scrollHeight,
-        x: 0,
-        y: 0,
-        scrollX: 0,
-        scrollY: 0,
-        allowTaint: true,
-        removeContainer: false,
-        imageTimeout: 15000,
-        onclone: (clonedDoc, element) => {
-          // Asegurar que el body tenga el fondo correcto
-          const body = clonedDoc.body;
-          if (body) {
-            body.style.backgroundColor = bgColorString;
-            body.style.margin = '0';
-            body.style.padding = '0';
-          }
+      font(8.5, false, C.body);
+      pdf.text(exp.company, mL, lY);
+      lY += LH.md;
 
-          // Asegurar que el html tenga el fondo correcto
-          const html = clonedDoc.documentElement;
-          if (html) {
-            html.style.backgroundColor = bgColorString;
-            html.style.margin = '0';
-            html.style.padding = '0';
-          }
+      font(8, false, C.muted);
+      pdf.text(exp.focus[lang], mL, lY);
+      lY += LH.md;
 
-          // Asegurar que el elemento clonado mantenga sus estilos
-          const clonedElement = clonedDoc.querySelector('.cv-container') as HTMLElement;
-          if (clonedElement) {
-            clonedElement.style.transform = 'translateZ(0)';
-            clonedElement.style.backgroundColor = bgColorString;
-          }
-        },
-      });
+      font(7.5, false, C.sub);
+      const descLines = wrap(exp.description[lang], leftW);
+      pdf.text(descLines, mL, lY);
+      lY += descLines.length * LH.xs + 2.5;
+    });
 
-      const imgData = canvas.toDataURL('image/png', 1.0);
+    lY += 6;
 
-      // Crear PDF
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
+    // ── LEFT: EDUCATION ──
+    lY = section(mL, lY, leftW, t('cv.education'));
 
-      // Convertir dimensiones del canvas a mm
-      // html2canvas con scale 2: 1px canvas = 0.5px real = 0.132292mm
-      const pxToMm = 0.264583 / 2;
-      const imgWidthMm = canvas.width * pxToMm;
-      const imgHeightMm = canvas.height * pxToMm;
+    education.forEach((edu, i) => {
+      if (i > 0) lY += 2;
 
-      // Calcular ratio para ajustar al ancho de la página
-      const ratio = pdfWidth / imgWidthMm;
-      const scaledWidth = imgWidthMm * ratio;
-      const scaledHeight = imgHeightMm * ratio;
+      font(9, true, C.heading);
+      const degLines = wrap(edu.degree[lang], leftW - 22);
+      pdf.text(degLines, mL, lY);
+      font(7.5, false, C.faint);
+      pdf.text(edu.period, mL + leftW, lY, { align: 'right' });
+      lY += degLines.length * LH.md;
 
-      // Si la altura es mayor que una página, ajustar
-      let finalWidth = scaledWidth;
-      let finalHeight = scaledHeight;
-      let finalX = 0;
-      let finalY = 0;
+      font(8.5, false, C.body);
+      pdf.text(edu.institution, mL, lY);
+      lY += LH.md;
 
-      if (scaledHeight > pdfHeight) {
-        // Ajustar por altura
-        const heightRatio = pdfHeight / imgHeightMm;
-        finalWidth = imgWidthMm * heightRatio;
-        finalHeight = pdfHeight;
-        finalX = (pdfWidth - finalWidth) / 2; // Centrar horizontalmente
-        finalY = 0; // Sin margen superior
-      } else {
-        // Si el contenido es más pequeño que una página, centrar verticalmente
-        finalY = (pdfHeight - scaledHeight) / 2;
+      const desc = edu.description[lang];
+      if (desc) {
+        font(7.5, false, C.muted);
+        const dLines = wrap(desc, leftW);
+        pdf.text(dLines, mL, lY);
+        lY += dLines.length * LH.xs + 1;
       }
+      lY += 2;
+    });
 
-      // Rellenar fondo
-      pdf.setFillColor(bgColorRGB[0], bgColorRGB[1], bgColorRGB[2]);
-      pdf.rect(0, 0, pdfWidth, pdfHeight, 'F');
+    // ── RIGHT SIDEBAR background (termina en la misma Y que la regla del pie) ──
+    applyFill(rgb(248, 248, 248));
+    pdf.rect(rightX - 3, sidebarTop, rightW + 5, sidebarH, 'F');
 
-      // Agregar imagen
-      pdf.addImage(imgData, 'PNG', finalX, finalY, finalWidth, finalHeight);
+    // ── RIGHT: SKILLS ──
+    rY = section(rightX, rY, rightW, t('cv.coreCompetencies'));
 
-      // Agregar enlaces clicables sobre la imagen
-      // Calcular factor de escala: usar las dimensiones del canvas que es lo que realmente se capturó
-      // El canvas tiene scale 2, así que canvas.width = elemento.width * 2
-      // Necesitamos convertir de píxeles del elemento a mm del PDF usando el mismo ratio que la imagen
-      const elementToPdfRatioX = finalWidth / imgWidthMm;
-      const elementToPdfRatioY = finalHeight / imgHeightMm;
-      
-      // Función auxiliar para convertir posición del elemento a posición del PDF
-      const elementToPdf = (elementX: number, elementY: number, elementWidth: number, elementHeight: number) => {
-        // Convertir píxeles del elemento a mm, luego escalar al tamaño final del PDF
-        const xMm = elementX * pxToMm * elementToPdfRatioX;
-        const yMm = elementY * pxToMm * elementToPdfRatioY;
-        const widthMm = elementWidth * pxToMm * elementToPdfRatioX;
-        const heightMm = elementHeight * pxToMm * elementToPdfRatioY;
-        
-        return {
-          x: finalX + xMm,
-          y: finalY + yMm,
-          width: widthMm,
-          height: heightMm
-        };
-      };
+    skills[lang].forEach(skill => {
+      font(8, false, C.body);
+      pdf.text(`• ${skill}`, rightX, rY);
+      rY += LH.md;
+    });
+    rY += 5;
 
-      // Obtener posiciones relativas al contenedor
-      const cvRect = cvElement.getBoundingClientRect();
-      
-      // Email - buscar el span que contiene el email
-      const emailSpans = Array.from(cvElement.querySelectorAll('span'));
-      const emailElement = emailSpans.find(el => el.textContent?.trim() === personal.email) as HTMLElement;
-      if (emailElement) {
-        const emailRect = emailElement.getBoundingClientRect();
-        const emailRelativeX = emailRect.left - cvRect.left;
-        const emailRelativeY = emailRect.top - cvRect.top;
-        const emailPos = elementToPdf(emailRelativeX, emailRelativeY, emailRect.width, emailRect.height);
-        
-        // Agregar enlace de email
-        pdf.link(emailPos.x, emailPos.y, emailPos.width, emailPos.height, {
-          url: `mailto:${personal.email}`
-        });
-      }
-      
-      // LinkedIn - buscar el enlace de LinkedIn
-      const linkedinElement = cvElement.querySelector(`a[href="${personal.links.linkedin}"]`) as HTMLElement;
-      if (linkedinElement) {
-        const linkedinRect = linkedinElement.getBoundingClientRect();
-        const linkedinRelativeX = linkedinRect.left - cvRect.left;
-        const linkedinRelativeY = linkedinRect.top - cvRect.top;
-        const linkedinPos = elementToPdf(linkedinRelativeX, linkedinRelativeY, linkedinRect.width, linkedinRect.height);
-        
-        // Agregar enlace clicable
-        pdf.link(linkedinPos.x, linkedinPos.y, linkedinPos.width, linkedinPos.height, {
-          url: personal.links.linkedin
-        });
-      }
+    // ── RIGHT: TECH STACK ──
+    rY = section(rightX, rY, rightW, t('cv.technicalStack'));
 
-      // GitHub - buscar el enlace de GitHub
-      const githubElement = cvElement.querySelector(`a[href="${personal.links.github}"]`) as HTMLElement;
-      if (githubElement) {
-        const githubRect = githubElement.getBoundingClientRect();
-        const githubRelativeX = githubRect.left - cvRect.left;
-        const githubRelativeY = githubRect.top - cvRect.top;
-        const githubPos = elementToPdf(githubRelativeX, githubRelativeY, githubRect.width, githubRect.height);
-        
-        // Agregar enlace clicable
-        pdf.link(githubPos.x, githubPos.y, githubPos.width, githubPos.height, {
-          url: personal.links.github
-        });
-      }
+    font(7.5, true, C.sub);
+    pdf.text(techStack.production.title[lang], rightX, rY);
+    rY += 4;
+    techStack.production.items.forEach(item => {
+      font(7.5, false, C.body);
+      pdf.text(`• ${item.name}`, rightX, rY);
+      rY += LH.sm;
+    });
+    rY += 3;
 
-      // Agregar texto invisible para ATS (fuera del área visible)
-      pdf.setFontSize(8);
-      pdf.setTextColor(255, 255, 255);
+    font(7.5, true, C.sub);
+    pdf.text(techStack.experimental.title[lang], rightX, rY);
+    rY += 4;
+    techStack.experimental.items.forEach(item => {
+      font(7.5, false, C.body);
+      pdf.text(`• ${item.name}`, rightX, rY);
+      rY += LH.sm;
+    });
+    rY += 5;
 
-      let fullText = `${personal.name}\n`;
-      fullText += `${personal.title[language as keyof typeof personal.title]}\n`;
-      fullText += `${personal.email} | ${personal.phone} | ${personal.location}\n`;
-      fullText += `${personal.links.linkedin} | ${personal.links.github}\n\n`;
-      fullText += `PROFESSIONAL EXPERIENCE\n`;
-      experience.forEach((exp) => {
-        fullText += `${exp.role[language as keyof typeof exp.role]} | ${exp.company} | ${language === 'es' ? exp.period : exp.periodEn}\n`;
-        fullText += `${exp.focus[language as keyof typeof exp.focus]}\n`;
-        fullText += `${exp.description[language as keyof typeof exp.description]}\n\n`;
-      });
-      fullText += `EDUCATION\n`;
-      education.forEach((edu) => {
-        fullText += `${edu.degree[language as keyof typeof edu.degree]} | ${edu.institution} | ${edu.period}\n`;
-        if (edu.description[language as keyof typeof edu.description]) {
-          fullText += `${edu.description[language as keyof typeof edu.description]}\n`;
-        }
-        fullText += `\n`;
-      });
-      fullText += `SKILLS: ${skills[language as keyof typeof skills].join(', ')}\n\n`;
-      fullText += `TECHNICAL STACK: `;
-      techStack.production.items.forEach((item) => {
-        fullText += `${item.name} (${item.category}), `;
-      });
-      techStack.experimental.items.forEach((item) => {
-        fullText += `${item.name} (${item.category}), `;
-      });
-      fullText += `\n\n`;
-      fullText += `LANGUAGES\n`;
-      languagesData.forEach((lang) => {
-        fullText += `${lang.language[language as keyof typeof lang.language]}: ${lang.level[language as keyof typeof lang.level]}\n`;
-      });
-      fullText += `\nCERTIFICATIONS\n`;
-      certifications.forEach((cert) => {
-        fullText += `${cert.name} | ${cert.issuer} | ${cert.date}\n`;
-        fullText += `${cert.description[language as keyof typeof cert.description]}\n\n`;
-      });
+    // ── RIGHT: LANGUAGES ──
+    rY = section(rightX, rY, rightW, t('cv.languages'));
 
-      // Agregar texto invisible fuera del área visible
-      const textLines = fullText.split('\n');
-      textLines.forEach((line, index) => {
-        pdf.text(line, 0, pdfHeight * 10 + (index * 0.1));
-      });
+    languagesData.forEach(langItem => {
+      font(8, true, C.heading);
+      pdf.text(langItem.language[lang], rightX, rY);
+      font(7.5, false, C.muted);
+      pdf.text(langItem.level[lang], rightX + rightW, rY, { align: 'right' });
+      rY += LH.lg;
+    });
+    rY += 4;
 
-      // Agregar metadatos
-      pdf.setProperties({
-        title: `${personal.name} - CV`,
-        subject: 'Curriculum Vitae',
-        author: personal.name,
-        keywords: skills[language as keyof typeof skills].join(', ') + ', ' +
-                 techStack.production.items.map(i => i.name).join(', '),
-        creator: 'Portfolio Website'
-      });
+    // ── RIGHT: CERTIFICATIONS ──
+    rY = section(rightX, rY, rightW, t('cv.certifications'));
 
-      // Descargar PDF
-      pdf.save(`${personal.shortName.replace(/\s+/g, '_')}_CV_${language.toUpperCase()}.pdf`);
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-      // Fallback a print si falla
-      window.print();
-    }
+    certifications.forEach((cert, i) => {
+      if (i > 0) rY += 3;
+
+      font(8, true, C.heading);
+      const certLines = wrap(cert.name, rightW);
+      pdf.text(certLines, rightX, rY);
+      rY += certLines.length * LH.md;
+
+      font(7.5, false, C.sub);
+      pdf.text(`${cert.issuer} · ${cert.date}`, rightX, rY);
+      rY += LH.sm;
+
+      font(7.5, false, C.muted);
+      const certDescLines = wrap(cert.description[lang], rightW);
+      pdf.text(certDescLines, rightX, rY);
+      rY += certDescLines.length * LH.xs;
+    });
+
+    // ── COLUMN DIVIDER (misma altura que el fondo gris hasta la regla del pie) ──
+    const colDivX = mL + leftW + divGap / 2;
+    applyDraw(C.light);
+    pdf.setLineWidth(0.25);
+    pdf.line(colDivX, sidebarTop, colDivX, footerRuleY - sidebarBottomInset);
+
+    // ── FOOTER ──
+    hLine(mL, footerRuleY, totalW, C.light, 0.2);
+    font(6.5, false, C.faint);
+    pdf.text(personal.name, mL, footerY);
+    pdf.text(String(new Date().getFullYear()), pW - mR, footerY, { align: 'right' });
+
+    // ── METADATA ──
+    pdf.setProperties({
+      title: `${personal.name} - CV`,
+      subject: 'Curriculum Vitae',
+      author: personal.name,
+      keywords: [
+        ...skills[lang],
+        ...techStack.production.items.map(i => i.name),
+        ...techStack.experimental.items.map(i => i.name),
+      ].join(', '),
+      creator: 'Portfolio Website',
+    });
+
+    pdf.save(`${personal.shortName.replace(/\s+/g, '_')}_CV_${lang.toUpperCase()}.pdf`);
   };
 
   if (!isOpen) return null;
@@ -295,7 +294,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
   return (
     <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm overflow-y-auto no-print">
       <div className="min-h-screen py-8 px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="w-full max-w-[210mm] mx-auto">
           {/* Modal Header - Hidden on print */}
           <div className="flex items-center justify-between mb-6 no-print">
             <h2 className="text-2xl font-bold text-foreground">{t("cv.title")}</h2>
@@ -305,10 +304,22 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                 variant="outline"
                 size="sm"
                 onClick={handleDownloadPDF}
-                className="border-border/50 hover:border-primary/50"
+                title={t("cv.atsDownloadTitle")}
+                aria-label={`${t("cv.atsDownloadPrimary")}. ${t("cv.atsDownloadSecondary")}. ${t("cv.atsDownloadTitle")}`}
+                className="group border-border/50 hover:border-primary/50 focus-visible:border-primary/50 focus-visible:bg-accent h-auto min-h-9 gap-2 py-2 px-3 focus-visible:text-accent-foreground"
               >
-                <Download className="h-4 w-4 mr-2" />
-                {t("cv.print")}
+                <Download
+                  className="h-4 w-4 shrink-0 self-center text-foreground transition-colors group-hover:text-accent-foreground group-focus-visible:text-accent-foreground"
+                  aria-hidden
+                />
+                <span className="flex flex-col items-start text-left leading-tight">
+                  <span className="text-sm font-medium transition-colors group-hover:text-accent-foreground group-focus-visible:text-accent-foreground">
+                    {t("cv.atsDownloadPrimary")}
+                  </span>
+                  <span className="text-[10px] font-normal text-muted-foreground transition-colors group-hover:text-accent-foreground group-focus-visible:text-accent-foreground">
+                    {t("cv.atsDownloadSecondary")}
+                  </span>
+                </span>
               </Button>
               <Button
                 variant="ghost"
@@ -322,7 +333,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
           </div>
 
           {/* CV Document */}
-          <div ref={cvContainerRef} className="cv-container bg-card border border-border rounded-2xl shadow-xl overflow-hidden">
+          <div className="cv-container bg-card border border-border rounded-2xl shadow-xl overflow-hidden">
             {/* CV Header */}
             <div className="cv-header bg-gradient-to-r from-primary/10 to-accent/10 p-8 border-b border-border">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
@@ -333,7 +344,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                   <p className="text-xl text-primary font-medium mb-4">
                     {personal.title[language as keyof typeof personal.title]}
                   </p>
-                  <p className="text-muted-foreground max-w-md">
+                  <p className="text-muted-foreground max-w-xl md:max-w-2xl leading-relaxed">
                     {personal.subheadline[language as keyof typeof personal.subheadline]}
                   </p>
                 </div>
@@ -371,16 +382,16 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
               </div>
             </div>
 
-            {/* CV Body */}
-            <div className="p-8 grid md:grid-cols-3 gap-8">
+            {/* CV Body: flex en impresión (index.css) mantiene borde lateral y fondo gris a toda la altura */}
+            <div className="cv-body flex flex-col gap-8 p-8 md:flex-row md:items-stretch md:gap-0">
               {/* Main Column - Experience */}
-              <div className="md:col-span-2 space-y-8">
+              <div className="min-w-0 space-y-8 md:flex-[2] md:min-w-0 md:pr-6 lg:pr-8">
                 <div>
                   <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                     <Briefcase className="h-5 w-5 text-primary" />
                     {t("cv.professionalExp")}
                   </h2>
-                  <div className="space-y-6">
+                  <div className="space-y-10">
                     {experience.map((exp) => (
                       <div key={exp.id} className="relative pl-6 border-l-2 border-border hover:border-primary/50 transition-colors">
                         <div className="absolute left-0 top-0 w-2 h-2 rounded-full bg-primary -translate-x-[5px]" />
@@ -431,8 +442,8 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                 </div>
               </div>
 
-              {/* Sidebar */}
-              <div className="space-y-8">
+              {/* Sidebar: borde vertical y fondo alineados con la altura de la columna principal */}
+              <aside className="min-w-0 space-y-8 border-t border-border pt-8 md:flex-1 md:min-w-0 md:border-l md:border-t-0 md:border-border md:bg-muted/50 md:pl-6 md:pr-5 md:pt-0 lg:pl-7 lg:pr-6">
                 {/* Skills */}
                 <div>
                   <h2 className="text-lg font-bold text-foreground mb-4">{t("cv.coreCompetencies")}</h2>
@@ -450,7 +461,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                   </div>
                 </div>
 
-                <Separator />
+                <Separator className="mx-auto h-px !w-[calc(100%-0.75rem)] max-w-full bg-border" />
 
                 {/* Tech Stack */}
                 <div>
@@ -485,7 +496,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                   </div>
                 </div>
 
-                <Separator />
+                <Separator className="mx-auto h-px !w-[calc(100%-0.75rem)] max-w-full bg-border" />
 
                 {/* Languages */}
                 <div>
@@ -493,13 +504,16 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                     <Languages className="h-4 w-4 text-primary" />
                     {t("cv.languages")}
                   </h2>
-                  <div className="space-y-2">
+                  <div className="space-y-2.5">
                     {languagesData.map((lang, index) => (
-                      <div key={index} className="flex justify-between text-sm">
-                        <span className="text-foreground">
+                      <div
+                        key={index}
+                        className="grid grid-cols-[minmax(0,auto)_minmax(0,1fr)] gap-x-3 gap-y-0.5 items-baseline text-sm"
+                      >
+                        <span className="text-foreground shrink-0">
                           {lang.language[language as keyof typeof lang.language]}
                         </span>
-                        <span className="text-muted-foreground">
+                        <span className="min-w-0 text-muted-foreground text-right leading-snug pl-1">
                           {lang.level[language as keyof typeof lang.level]}
                         </span>
                       </div>
@@ -507,7 +521,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                   </div>
                 </div>
 
-                <Separator />
+                <Separator className="mx-auto h-px !w-[calc(100%-0.75rem)] max-w-full bg-border" />
 
                 {/* Certifications */}
                 <div>
@@ -527,7 +541,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                     ))}
                   </div>
                 </div>
-              </div>
+              </aside>
             </div>
           </div>
         </div>

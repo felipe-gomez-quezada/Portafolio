@@ -83,7 +83,10 @@ const translations = {
 
     // CV Modal
     "cv.title": "CV - Felipe Gómez Quezada",
-    "cv.print": "Descargar PDF",
+    "cv.atsDownloadPrimary": "Descargar PDF",
+    "cv.atsDownloadSecondary": "Versión ATS compatible",
+    "cv.atsDownloadTitle":
+      "PDF con maqueta simplificada para sistemas ATS y lectura automática.",
     "cv.professionalExp": "Experiencia Profesional",
     "cv.coreCompetencies": "Competencias Clave",
     "cv.technicalStack": "Stack Técnico",
@@ -155,7 +158,10 @@ const translations = {
 
     // CV Modal
     "cv.title": "CV - Felipe Gómez Quezada",
-    "cv.print": "Download PDF",
+    "cv.atsDownloadPrimary": "Download PDF",
+    "cv.atsDownloadSecondary": "ATS version",
+    "cv.atsDownloadTitle":
+      "Simplified PDF layout for ATS and automated screening.",
     "cv.professionalExp": "Professional Experience",
     "cv.coreCompetencies": "Core Competencies",
     "cv.technicalStack": "Technical Stack",
