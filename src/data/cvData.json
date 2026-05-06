@@ -11,8 +11,8 @@
       "en": "Building High-Performance Tech Teams & Scalable Architectures."
     },
     "subheadline": {
-      "es": "¡Hola 👋! Mi nombre es Felipe, CTO y Software Engineer. Soy especialista en construir equipos tech de alto rendimiento y productos tecnológicos para startups.",
-      "en": "Hello 👋! My name is Felipe, CTO and Software Engineer. I'm specialized in building high-performance tech teams and scalable products for startups."
+      "es": "CTO y Software Engineer con foco en escalar startups, construir equipos tecnológicos de alto rendimiento y convertir visión de negocio en productos con impacto medible.",
+      "en": "CTO and Software Engineer focused on scaling startups, building high-performance tech teams, and turning business vision into products with measurable impact."
     },
     "location": "Santiago, Chile",
     "email": "felipe.gomez.quezada@gmail.com",
@@ -26,19 +26,38 @@
     {
       "id": 1,
       "role": {
-        "es": "Chief Technology Officer",
-        "en": "Chief Technology Officer"
+        "es": "CTO",
+        "en": "CTO"
       },
       "company": "Lifebox",
       "period": "2024 - Presente",
       "periodEn": "2024 - Present",
       "focus": {
-        "es": "Estrategia tecnológica y liderazgo",
-        "en": "Technology strategy and leadership"
+        "es": "85.000+ colaboradores | 50 empresas",
+        "en": "85,000+ collaborators | 50 companies | CLP $330M CORFO"
       },
       "description": {
-        "es": "Liderar y dirigir la estrategia tecnológica de Lifebox. Asegurar que las inversiones tecnológicas se ajusten a los objetivos de la organización, dirigir y expandir el equipo de tecnología, establecer la visión a largo plazo, metodologías y estándares de calidad.",
-        "en": "Lead and direct Lifebox's technology strategy. Ensure technology investments align with organizational objectives, lead and expand the technology team, establish long-term vision, methodologies and quality standards."
+        "es": "Lideré la estrategia tecnológica de Lifebox, con impacto en más de 85.000 colaboradores en 50 de las empresas más grandes de Chile. Conformé y lideré el equipo tecnológico desde cero hasta un peak de 7 personas, obtuve y ejecuté dos fondos CORFO (Crea y Valida, y Consolida y Expande) aportando más de $330M CLP en ingresos, y definí la arquitectura y estándares de calidad de los productos de Lifebox sobre Azure.",
+        "en": "Led Lifebox's technology strategy, impacting more than 85,000 collaborators across 50 of Chile's largest companies. Built and led the tech team from scratch to a peak of 7 members, secured and executed two CORFO innovation grants (Crea y Valida, and Consolida y Expande) that contributed over CLP $330M in revenue, and defined architecture and quality standards for Lifebox products on Azure."
+      },
+      "current": true
+    },
+    {
+      "id": 3,
+      "role": {
+        "es": "Founder & CTO",
+        "en": "Founder & CTO"
+      },
+      "company": "Camino PAES",
+      "period": "2025 - Presente",
+      "periodEn": "2025 - Present",
+      "focus": {
+        "es": "375 usuarios | 700+ tests | ~700 preguntas",
+        "en": "375 users | 700+ tests | ~700 questions"
+      },
+      "description": {
+        "es": "Fundé y desarrollé de forma independiente una plataforma SaaS para preparación de la PAES (Prueba de Acceso a la Educación Superior en Chile). A mayo de 2026: 375 usuarios registrados, más de 700 tests realizados y ~700 preguntas en tres materias. Diseñé una arquitectura con taxonomía por materia/eje/tema, generación automática diaria vía edge functions, rankings y gamificación. Stack: Next.js, Supabase, Tailwind CSS y Vercel.",
+        "en": "Founded and independently built a SaaS platform for PAES preparation (Chile's university entrance exam). As of May 2026: 375 registered users, 700+ completed tests, and ~700 questions across three subjects. Designed an architecture with subject/axis/topic taxonomy, daily automated question generation via edge functions, rankings, and gamification. Stack: Next.js, Supabase, Tailwind CSS, and Vercel."
       },
       "current": true
     },
@@ -52,31 +71,12 @@
       "period": "2023 - 2024",
       "periodEn": "2023 - 2024",
       "focus": {
-        "es": "Desarrollo y creación de la Digital Factory",
-        "en": "Development and creation of the Digital Factory"
+        "es": "Digital Factory y expansión de productos",
+        "en": "Digital Factory and product expansion"
       },
       "description": {
-        "es": "Expandir funcionalidades de productos tecnológicos internos, colaborar en el desarrollo de nuevos productos, planificar futuros proyectos tecnológicos, crear y consolidar la Digital Factory.",
-        "en": "Expand internal tech product functionalities, collaborate in new product development, plan future technology projects, create and consolidate the Digital Factory."
-      },
-      "current": false
-    },
-    {
-      "id": 3,
-      "role": {
-        "es": "Software Engineer",
-        "en": "Software Engineer"
-      },
-      "company": "Toku",
-      "period": "2022 - 2023",
-      "periodEn": "2022 - 2023",
-      "focus": {
-        "es": "Full Stack - Industria de pagos",
-        "en": "Full Stack - Payments industry"
-      },
-      "description": {
-        "es": "Ingeniero Full Stack usando Python, FastAPI, Postgres, Vue y Docker. Creación de funcionalidades y solución de bugs en la industria de pagos en Chile.",
-        "en": "Full Stack Engineer using Python, FastAPI, Postgres, Vue and Docker. Feature development and bug fixing in Chile's payments industry."
+        "es": "Expandí funcionalidades de productos tecnológicos internos y colaboré en el desarrollo de nuevos productos. Creé y consolidé la Digital Factory de Lifebox, diseñé el plan de crecimiento del área, contraté a los dos primeros integrantes del equipo y planifiqué/ejecuté proyectos tecnológicos de largo plazo.",
+        "en": "Expanded internal product capabilities and collaborated on new product development. Created and consolidated Lifebox's Digital Factory, designed the area's growth plan, hired the first two team members, and planned/executed long-term technology initiatives."
       },
       "current": false
     },
@@ -86,21 +86,40 @@
         "es": "Software Engineer",
         "en": "Software Engineer"
       },
-      "company": "Total Abogados",
-      "period": "2022",
-      "periodEn": "2022",
+      "company": "Toku",
+      "period": "2022 - 2023",
+      "periodEn": "2022 - 2023",
       "focus": {
-        "es": "Full Stack y Portal de Pagos",
-        "en": "Full Stack and Payment Portal"
+        "es": "Full Stack en industria de pagos",
+        "en": "Full Stack in payments industry"
       },
       "description": {
-        "es": "Desarrollo de aplicaciones en Python, Angular, MongoDB, Docker. Diseño y desarrollo de Portal de Pagos usando Python y Flask.",
-        "en": "Application development in Python, Angular, MongoDB, Docker. Design and development of Payment Portal using Python and Flask."
+        "es": "Ingeniero Full Stack en la industria de pagos en Chile usando Python, FastAPI, PostgreSQL, Vue, Docker y GCP. Desarrollé funcionalidades y resolví bugs en producción. Además, creé procesos ETL para el flujo de información entre herramientas de terceros y el Data Lake de la empresa.",
+        "en": "Full Stack Engineer in Chile's payments industry using Python, FastAPI, PostgreSQL, Vue, Docker, and GCP. Built features and resolved production bugs. Also developed ETL processes to move data between third-party tools and the company's Data Lake."
       },
       "current": false
     },
     {
       "id": 5,
+      "role": {
+        "es": "Software Engineer",
+        "en": "Software Engineer"
+      },
+      "company": "Total Abogados",
+      "period": "2022",
+      "periodEn": "2022",
+      "focus": {
+        "es": "Full Stack y portal de pagos",
+        "en": "Full Stack and payment portal"
+      },
+      "description": {
+        "es": "Desarrollo Full Stack con Python, Angular, MongoDB, Docker y AWS. Brindé soporte técnico y resolví incidencias críticas para el negocio. Diseñé y desarrollé la nueva versión del Portal de Pagos con Python y Flask.",
+        "en": "Full Stack development with Python, Angular, MongoDB, Docker, and AWS. Provided technical support and resolved business-critical incidents. Designed and built the new version of the Payment Portal using Python and Flask."
+      },
+      "current": false
+    },
+    {
+      "id": 6,
       "role": {
         "es": "Business Intelligence Analyst",
         "en": "Business Intelligence Analyst"
@@ -109,12 +128,12 @@
       "period": "2021",
       "periodEn": "2021",
       "focus": {
-        "es": "Machine Learning y análisis de datos",
-        "en": "Machine Learning and data analysis"
+        "es": "Machine Learning y analítica avanzada",
+        "en": "Machine Learning and advanced analytics"
       },
       "description": {
-        "es": "Creación de algoritmos de análisis de datos y machine learning para gestión de beneficios alimentarios de más de 120.000 trabajadores.",
-        "en": "Creation of data analysis and machine learning algorithms for food benefits management of over 120,000 workers."
+        "es": "Desarrollé algoritmos de machine learning para la gestión de beneficios alimentarios de más de 120.000 trabajadores. Implementé segmentación y clustering para analizar patrones de comportamiento, además de primeros sistemas recomendadores para sugerir dónde comprar según comportamientos previos.",
+        "en": "Developed machine learning algorithms for managing food benefits for more than 120,000 workers. Implemented segmentation and clustering to understand user/client behavior patterns, and built early recommendation-system efforts to suggest where users should shop based on prior behavior."
       },
       "current": false
     }
@@ -123,39 +142,17 @@
     {
       "degree": {
         "es": "Ingeniería Civil en Computación",
-        "en": "Computer Science Engineering"
+        "en": "MSc in Computer Engineering (equiv.)"
       },
       "institution": "Pontificia Universidad Católica de Chile",
-      "period": "2018 - 2020",
-      "description": {
-        "es": "En proceso de obtención del título de Ingeniero Civil de Computación",
-        "en": "In process of obtaining Computer Science Engineering degree"
-      }
-    },
-    {
-      "degree": {
-        "es": "Licenciatura en Ciencias de la Ingeniería",
-        "en": "Bachelor in Engineering Sciences"
-      },
-      "institution": "Pontificia Universidad Católica de Chile",
-      "period": "2014 - 2018",
+      "period": "2014 - 2020",
       "description": {
         "es": "",
         "en": ""
       }
     }
   ],
-  "certifications": [
-    {
-      "name": "Huawei HCIA Course",
-      "issuer": "Huawei",
-      "date": "2020",
-      "description": {
-        "es": "Curso de nivel básico-intermedio de inteligencia artificial, técnicas de estado del arte, análisis de datos y frameworks de ML.",
-        "en": "Basic-intermediate level AI course, state-of-the-art techniques, data analysis and ML frameworks."
-      }
-    }
-  ],
+  "certifications": [],
   "languages": [
     {
       "language": {
@@ -189,15 +186,51 @@
         "en": "Current Expertise"
       },
       "items": [
-        { "name": "Python", "category": "Backend", "icon": "Code2" },
-        { "name": "Nuxt 3", "category": "Frontend", "icon": "Layers" },
-        { "name": "Vue", "category": "Frontend", "icon": "Layers" },
-        { "name": "FastAPI", "category": "Backend", "icon": "Zap" },
-        { "name": "Django", "category": "Backend", "icon": "Server" },
-        { "name": "Express.js", "category": "Backend", "icon": "Braces" },
-        { "name": "PostgreSQL", "category": "Database", "icon": "Database" },
-        { "name": "Docker", "category": "DevOps", "icon": "Container" },
-        { "name": "Azure", "category": "Cloud Infrastructure", "icon": "Cloud" }
+        {
+          "name": "Python",
+          "category": "Backend",
+          "icon": "Code2"
+        },
+        {
+          "name": "Django",
+          "category": "Backend",
+          "icon": "Server"
+        },
+        {
+          "name": "FastAPI",
+          "category": "Backend",
+          "icon": "Zap"
+        },
+        {
+          "name": "Nuxt 3",
+          "category": "Frontend",
+          "icon": "Layers"
+        },
+        {
+          "name": "Vue",
+          "category": "Frontend",
+          "icon": "Layers"
+        },
+        {
+          "name": "Express.js",
+          "category": "Backend",
+          "icon": "Braces"
+        },
+        {
+          "name": "PostgreSQL",
+          "category": "Database",
+          "icon": "Database"
+        },
+        {
+          "name": "Docker",
+          "category": "DevOps",
+          "icon": "Container"
+        },
+        {
+          "name": "Azure",
+          "category": "Cloud Infrastructure",
+          "icon": "Cloud"
+        }
       ]
     },
     "experimental": {
@@ -210,9 +243,26 @@
         "en": "Currently Learning"
       },
       "items": [
-        { "name": "Next.js", "category": "Framework", "icon": "Sparkles" },
-        { "name": "Vercel", "category": "Platform", "icon": "Triangle" },
-        { "name": "Supabase", "category": "Backend as a Service", "icon": "Database" }
+        {
+          "name": "Next.js",
+          "category": "Framework",
+          "icon": "Sparkles"
+        },
+        {
+          "name": "Vercel",
+          "category": "Platform",
+          "icon": "Triangle"
+        },
+        {
+          "name": "Supabase",
+          "category": "Backend as a Service",
+          "icon": "Database"
+        },
+        {
+          "name": "Tailwind CSS",
+          "category": "Styling",
+          "icon": "Palette"
+        }
       ]
     },
     "toolkit": {
@@ -225,32 +275,62 @@
         "en": "Productivity & AI"
       },
       "items": [
-        { "name": "Cursor Pro", "category": "AI Tool", "icon": "Bot" },
-        { "name": "Gemini Pro", "category": "Generative AI", "icon": "Sparkles" },
-        { "name": "Claude Pro", "category": "Generative AI", "icon": "Brain" },
-        { "name": "V0", "category": "AI Prototyping", "icon": "Zap" },
-        { "name": "Notion", "category": "Knowledge Base", "icon": "BookOpen" },
-        { "name": "Granola AI", "category": "Notetaker", "icon": "StickyNote" },
-        { "name": "Google Workspace", "category": "Collaboration", "icon": "Mail" }
+        {
+          "name": "Cursor Pro",
+          "category": "AI Tool",
+          "icon": "Bot"
+        },
+        {
+          "name": "Gemini Pro",
+          "category": "Generative AI",
+          "icon": "Sparkles"
+        },
+        {
+          "name": "Claude Pro",
+          "category": "Generative AI",
+          "icon": "Brain"
+        },
+        {
+          "name": "V0",
+          "category": "AI Prototyping",
+          "icon": "Zap"
+        },
+        {
+          "name": "Notion",
+          "category": "Knowledge Base",
+          "icon": "BookOpen"
+        },
+        {
+          "name": "Granola AI",
+          "category": "Notetaker",
+          "icon": "StickyNote"
+        },
+        {
+          "name": "Google Workspace",
+          "category": "Collaboration",
+          "icon": "Mail"
+        }
       ]
     }
   },
   "skills": {
     "es": [
-      "Liderazgo de Equipos",
-      "Arquitectura Técnica",
-      "Infraestructura Cloud",
+      "Liderazgo de Equipos Tecnológicos",
+      "Arquitectura Técnica y Cloud (Azure, Vercel)",
+      "Fondos de Innovación (CORFO)",
       "Metodologías Ágiles",
       "Escalamiento de Startups",
-      "Transformación Digital"
+      "Transformación Digital",
+      "Fundador de SaaS"
     ],
     "en": [
-      "Team Leadership",
-      "Technical Architecture",
-      "Cloud Infrastructure",
+      "Technology Team Leadership",
+      "Technical and Cloud Architecture (Azure, Vercel)",
+      "Innovation Funding (CORFO)",
       "Agile Methodologies",
       "Startup Scaling",
-      "Digital Transformation"
+      "Digital Transformation",
+      "SaaS Founder"
     ]
   }
 }

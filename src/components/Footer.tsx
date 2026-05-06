@@ -28,17 +28,17 @@ const Footer = () => {
 
           {/* Center - Social links */}
           <div className="flex items-center gap-4">
-            <a 
-              href={personal.links.linkedin} 
-              target="_blank" 
+            <a
+              href={personal.links.linkedin}
+              target="_blank"
               rel="noopener noreferrer"
               className="p-3 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 group"
             >
               <Linkedin className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
-            <a 
-              href={personal.links.github} 
-              target="_blank" 
+            <a
+              href={personal.links.github}
+              target="_blank"
               rel="noopener noreferrer"
               className="p-3 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 group"
             >
@@ -50,9 +50,6 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-end gap-2">
             <div className="flex items-center gap-4 flex-wrap justify-center md:justify-end">
               <VisitCounter />
-              <p className="text-sm text-muted-foreground flex items-center gap-1">
-                {t("footer.builtWith")} <Heart className="h-4 w-4 text-destructive fill-destructive" /> {t("footer.and")}
-              </p>
               <Button
                 variant="ghost"
                 size="icon"
