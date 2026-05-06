@@ -19,7 +19,8 @@
     "phone": "+56 9 64059392",
     "links": {
       "linkedin": "https://www.linkedin.com/in/felipegomezquezada/",
-      "github": "https://github.com/felipe-gomez-quezada"
+      "github": "https://github.com/felipe-gomez-quezada",
+      "website": "https://felipegomez.dev"
     }
   },
   "experience": [
@@ -316,20 +317,18 @@
   "skills": {
     "es": [
       "Liderazgo de Equipos Tecnológicos",
-      "Arquitectura Técnica y Cloud (Azure, Vercel)",
+      "Arquitectura y desarrollo de Software",
       "Fondos de Innovación (CORFO)",
       "Metodologías Ágiles",
       "Escalamiento de Startups",
-      "Transformación Digital",
       "Fundador de SaaS"
     ],
     "en": [
       "Technology Team Leadership",
-      "Technical and Cloud Architecture (Azure, Vercel)",
-      "Innovation Funding (CORFO)",
+      "Software Architecture and Development",
+      "Innovation Funding",
       "Agile Methodologies",
       "Startup Scaling",
-      "Digital Transformation",
       "SaaS Founder"
     ]
   }

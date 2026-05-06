@@ -1,4 +1,4 @@
-import { X, Mail, Linkedin, Github, MapPin, Calendar, Briefcase, GraduationCap, Award, Languages, Download } from "lucide-react";
+import { X, Mail, Linkedin, Github, Globe, MapPin, Calendar, Briefcase, GraduationCap, Award, Languages, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -21,8 +21,8 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
 
     const pW = 210, pH = 297;
-    const mL = 14, mR = 14, mT = 14;
-    const totalW = pW - mL - mR; // 182mm
+    const mL = 12, mR = 12, mT = 12;
+    const totalW = pW - mL - mR;
 
     const rightW = 54;
     const divGap = 7;
@@ -103,6 +103,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
       { label: personal.location,                       url: null },
       { label: 'linkedin.com/in/felipegomezquezada',   url: personal.links.linkedin },
       { label: 'github.com/felipe-gomez-quezada',      url: personal.links.github },
+      { label: 'felipegomez.dev',                       url: personal.links.website },
     ];
 
     contacts.forEach(item => {
@@ -118,14 +119,14 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
     const summaryLineMm = 3.55;
     const summaryBottomY = hy + summaryLines.length * summaryLineMm;
     const contactsBottomY = cy + 1;
-    const headerBottom = Math.max(mT + 47, summaryBottomY + 9, contactsBottomY + 4);
+    const headerBottom = Math.max(mT + 38, summaryBottomY + 3, contactsBottomY + 0.5);
     hLine(mL, headerBottom, totalW, C.ink, 0.6);
 
     // ── BODY ──
-    const bodyY = headerBottom + 7;
-    const footerY = pH - 8;
+    const bodyY = headerBottom + 3.5;
+    const footerY = pH - 6;
     const footerRuleY = footerY - 3;
-    const sidebarTop = bodyY - 4;
+    const sidebarTop = bodyY - 2;
     const sidebarBottomInset = 0.35;
     const sidebarH = Math.max(0, footerRuleY - sidebarTop - sidebarBottomInset);
     let lY = bodyY;
@@ -161,35 +162,6 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
       const descLines = wrap(exp.description[lang], leftW);
       pdf.text(descLines, mL, lY);
       lY += descLines.length * LH.xs + 2.5;
-    });
-
-    lY += 6;
-
-    // ── LEFT: EDUCATION ──
-    lY = section(mL, lY, leftW, t('cv.education'));
-
-    education.forEach((edu, i) => {
-      if (i > 0) lY += 2;
-
-      font(9, true, C.heading);
-      const degLines = wrap(edu.degree[lang], leftW - 22);
-      pdf.text(degLines, mL, lY);
-      font(7.5, false, C.faint);
-      pdf.text(edu.period, mL + leftW, lY, { align: 'right' });
-      lY += degLines.length * LH.md;
-
-      font(8.5, false, C.body);
-      pdf.text(edu.institution, mL, lY);
-      lY += LH.md;
-
-      const desc = edu.description[lang];
-      if (desc) {
-        font(7.5, false, C.muted);
-        const dLines = wrap(desc, leftW);
-        pdf.text(dLines, mL, lY);
-        lY += dLines.length * LH.xs + 1;
-      }
-      lY += 2;
     });
 
     // ── RIGHT SIDEBAR background (termina en la misma Y que la regla del pie) ──
@@ -240,6 +212,37 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
       rY += LH.lg;
     });
     rY += 4;
+
+    // ── RIGHT: EDUCATION (columna estrecha; libera espacio en experiencia) ──
+    rY = section(rightX, rY, rightW, t('cv.education'));
+
+    education.forEach((edu, i) => {
+      if (i > 0) rY += 2;
+
+      font(7.5, true, C.heading);
+      const degLines = wrap(edu.degree[lang], rightW);
+      pdf.text(degLines, rightX, rY);
+      rY += degLines.length * LH.sm;
+
+      font(7, false, C.body);
+      const instLines = wrap(edu.institution, rightW);
+      pdf.text(instLines, rightX, rY);
+      rY += instLines.length * LH.xs;
+
+      font(7, false, C.faint);
+      pdf.text(edu.period, rightX, rY);
+      rY += LH.sm;
+
+      const desc = edu.description[lang];
+      if (desc) {
+        font(6.5, false, C.muted);
+        const dLines = wrap(desc, rightW);
+        pdf.text(dLines, rightX, rY);
+        rY += dLines.length * LH.xs + 0.5;
+      }
+      rY += 1;
+    });
+    rY += 3;
 
     if (hasCertifications) {
       // ── RIGHT: CERTIFICATIONS ──
@@ -381,6 +384,15 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                     <Github className="h-4 w-4 flex-shrink-0 mt-0.5" />
                     <span className="text-xs">felipe-gomez-quezada</span>
                   </a>
+                  <a
+                    href={personal.links.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-baseline gap-1.5 text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <Globe className="h-4 w-4 flex-shrink-0 mt-0.5" />
+                    <span className="text-xs">felipegomez.dev</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -414,31 +426,6 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                         <p className="text-sm text-muted-foreground">
                           {exp.description[language as keyof typeof exp.description]}
                         </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Education */}
-                <div>
-                  <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                    <GraduationCap className="h-5 w-5 text-primary" />
-                    {t("cv.education")}
-                  </h2>
-                  <div className="space-y-4">
-                    {education.map((edu, index) => (
-                      <div key={index} className="relative pl-6 border-l-2 border-border">
-                        <div className="absolute left-0 top-0 w-2 h-2 rounded-full bg-accent -translate-x-[5px]" />
-                        <h3 className="font-semibold text-foreground">
-                          {edu.degree[language as keyof typeof edu.degree]}
-                        </h3>
-                        <p className="text-sm text-primary">{edu.institution}</p>
-                        <p className="text-xs text-muted-foreground">{edu.period}</p>
-                        {edu.description[language as keyof typeof edu.description] && (
-                          <p className="text-sm text-muted-foreground mt-1">
-                            {edu.description[language as keyof typeof edu.description]}
-                          </p>
-                        )}
                       </div>
                     ))}
                   </div>
@@ -519,6 +506,33 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                         <span className="min-w-0 text-muted-foreground text-right leading-snug pl-1">
                           {lang.level[language as keyof typeof lang.level]}
                         </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <Separator className="mx-auto h-px !w-[calc(100%-0.75rem)] max-w-full bg-border" />
+
+                {/* Education — misma ubicación que en el PDF (tras idiomas) */}
+                <div>
+                  <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                    <GraduationCap className="h-5 w-5 text-primary shrink-0" />
+                    {t("cv.education")}
+                  </h2>
+                  <div className="space-y-4">
+                    {education.map((edu, index) => (
+                      <div key={index} className="relative pl-6 border-l-2 border-border">
+                        <div className="absolute left-0 top-0 w-2 h-2 rounded-full bg-accent -translate-x-[5px]" />
+                        <h3 className="font-semibold text-foreground text-sm leading-snug">
+                          {edu.degree[language as keyof typeof edu.degree]}
+                        </h3>
+                        <p className="text-xs text-primary mt-0.5">{edu.institution}</p>
+                        <p className="text-xs text-muted-foreground">{edu.period}</p>
+                        {edu.description[language as keyof typeof edu.description] && (
+                          <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                            {edu.description[language as keyof typeof edu.description]}
+                          </p>
+                        )}
                       </div>
                     ))}
                   </div>
