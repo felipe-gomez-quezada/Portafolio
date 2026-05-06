@@ -15,6 +15,7 @@ interface LiveCVModalProps {
 const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
   const { language, t } = useLanguage();
   const { personal, experience, techStack, skills, education, languages: languagesData, certifications } = cvData;
+  const hasCertifications = certifications.length > 0;
   const handleDownloadPDF = () => {
     const lang = language as 'es' | 'en';
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
@@ -240,26 +241,28 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
     });
     rY += 4;
 
-    // ── RIGHT: CERTIFICATIONS ──
-    rY = section(rightX, rY, rightW, t('cv.certifications'));
+    if (hasCertifications) {
+      // ── RIGHT: CERTIFICATIONS ──
+      rY = section(rightX, rY, rightW, t('cv.certifications'));
 
-    certifications.forEach((cert, i) => {
-      if (i > 0) rY += 3;
+      certifications.forEach((cert, i) => {
+        if (i > 0) rY += 3;
 
-      font(8, true, C.heading);
-      const certLines = wrap(cert.name, rightW);
-      pdf.text(certLines, rightX, rY);
-      rY += certLines.length * LH.md;
+        font(8, true, C.heading);
+        const certLines = wrap(cert.name, rightW);
+        pdf.text(certLines, rightX, rY);
+        rY += certLines.length * LH.md;
 
-      font(7.5, false, C.sub);
-      pdf.text(`${cert.issuer} · ${cert.date}`, rightX, rY);
-      rY += LH.sm;
+        font(7.5, false, C.sub);
+        pdf.text(`${cert.issuer} · ${cert.date}`, rightX, rY);
+        rY += LH.sm;
 
-      font(7.5, false, C.muted);
-      const certDescLines = wrap(cert.description[lang], rightW);
-      pdf.text(certDescLines, rightX, rY);
-      rY += certDescLines.length * LH.xs;
-    });
+        font(7.5, false, C.muted);
+        const certDescLines = wrap(cert.description[lang], rightW);
+        pdf.text(certDescLines, rightX, rY);
+        rY += certDescLines.length * LH.xs;
+      });
+    }
 
     // ── COLUMN DIVIDER (misma altura que el fondo gris hasta la regla del pie) ──
     const colDivX = mL + leftW + divGap / 2;
@@ -521,26 +524,30 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                   </div>
                 </div>
 
-                <Separator className="mx-auto h-px !w-[calc(100%-0.75rem)] max-w-full bg-border" />
+                {hasCertifications && (
+                  <>
+                    <Separator className="mx-auto h-px !w-[calc(100%-0.75rem)] max-w-full bg-border" />
 
-                {/* Certifications */}
-                <div>
-                  <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                    <Award className="h-4 w-4 text-primary" />
-                    {t("cv.certifications")}
-                  </h2>
-                  <div className="space-y-3">
-                    {certifications.map((cert, index) => (
-                      <div key={index}>
-                        <p className="font-medium text-foreground text-sm">{cert.name}</p>
-                        <p className="text-xs text-primary">{cert.issuer} - {cert.date}</p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {cert.description[language as keyof typeof cert.description]}
-                        </p>
+                    {/* Certifications */}
+                    <div>
+                      <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                        <Award className="h-4 w-4 text-primary" />
+                        {t("cv.certifications")}
+                      </h2>
+                      <div className="space-y-3">
+                        {certifications.map((cert, index) => (
+                          <div key={index}>
+                            <p className="font-medium text-foreground text-sm">{cert.name}</p>
+                            <p className="text-xs text-primary">{cert.issuer} - {cert.date}</p>
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {cert.description[language as keyof typeof cert.description]}
+                            </p>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </div>
+                  </>
+                )}
               </aside>
             </div>
           </div>
