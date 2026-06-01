@@ -54,7 +54,7 @@ const translations = {
     "nav.viewCV": "CV",
 
     // Hero
-    "hero.available": "Disponible parcialmente",
+    "hero.available": "Disponible",
     "hero.headline.part1": "Construyendo Equipos Tech de Alto Rendimiento",
     "hero.headline.part2": "& Arquitecturas Escalables.",
     "hero.subheadline": "Hola 👋, mi nombre es Felipe, CTO y Software Engineer, especialista en construir equipos tech de alto rendimiento y productos tecnológicos para startups.",
@@ -109,8 +109,8 @@ const translations = {
 
     // Contact
     "contact.title": "Trabajemos Juntos",
-    "contact.subtitle": "Estoy parcialmente disponible para proyectos de consultoría, colaboraciones y oportunidades interesantes (actualmente trabajo fulltime).",
-    "contact.description": "Tengo experiencia liderando transformaciones tecnológicas y construyendo equipos de alto rendimiento. Si tienes un proyecto que necesite visión técnica y ejecución sólida, hablemos.",
+    "contact.subtitle": "Estoy disponible y buscando oportunidades como Tech Lead/CTO, o roles de builder y Senior Software Engineer.",
+    "contact.description": "Tengo experiencia liderando transformaciones tecnológicas y construyendo equipos de alto rendimiento. Si buscas liderazgo técnico con ejecución sólida, hablemos.",
     "contact.cta": "Contáctame",
     "contact.email": "Email",
     "contact.emailDesc": "Escríbeme directamente",
@@ -129,7 +129,7 @@ const translations = {
     "nav.viewCV": "CV",
 
     // Hero
-    "hero.available": "Partially available for consulting",
+    "hero.available": "Available",
     "hero.headline.part1": "Building High-Performance Tech Teams",
     "hero.headline.part2": "& Scalable Architectures.",
     "hero.subheadline": "CTO specialized in scaling startups. Transforming business vision into engineering reality.",
@@ -184,8 +184,8 @@ const translations = {
 
     // Contact
     "contact.title": "Let's Work Together",
-    "contact.subtitle": "I have limited time available for consulting projects, collaborations, and interesting opportunities (currently working fulltime).",
-    "contact.description": "I have experience leading technical transformations and building high-performance teams. If you have a project that needs technical vision and solid execution, let's talk.",
+    "contact.subtitle": "I'm available and looking for Tech Lead/CTO opportunities, as well as builder and Senior Software Engineer roles.",
+    "contact.description": "I have experience leading technical transformations and building high-performance teams. If you're looking for strong technical leadership and execution, let's talk.",
     "contact.cta": "Get in Touch",
     "contact.email": "Email",
     "contact.emailDesc": "Send me a direct message",

@@ -31,8 +31,8 @@
         "en": "CTO"
       },
       "company": "Lifebox",
-      "period": "2024 - Presente",
-      "periodEn": "2024 - Present",
+      "period": "2024 - Mayo 2026",
+      "periodEn": "2024 - May 2026",
       "focus": {
         "es": "85.000+ colaboradores | 50 empresas",
         "en": "85,000+ collaborators | 50 companies | CLP $330M CORFO"
@@ -41,7 +41,7 @@
         "es": "Lideré la estrategia tecnológica de Lifebox, con impacto en más de 85.000 colaboradores en 50 de las empresas más grandes de Chile. Conformé y lideré el equipo tecnológico desde cero hasta un peak de 7 personas, obtuve y ejecuté dos fondos CORFO (Crea y Valida, y Consolida y Expande) aportando más de $330M CLP en ingresos, y definí la arquitectura y estándares de calidad de los productos de Lifebox sobre Azure.",
         "en": "Led Lifebox's technology strategy, impacting more than 85,000 collaborators across 50 of Chile's largest companies. Built and led the tech team from scratch to a peak of 7 members, secured and executed two CORFO innovation grants (Crea y Valida, and Consolida y Expande) that contributed over CLP $330M in revenue, and defined architecture and quality standards for Lifebox products on Azure."
       },
-      "current": true
+      "current": false
     },
     {
       "id": 3,
