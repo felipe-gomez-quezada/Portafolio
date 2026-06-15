@@ -88,8 +88,11 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
     pdf.text(personal.title[lang], mL, hy);
     hy += 5.2;
 
-    // Strip emoji before wrapping — jsPDF Helvetica can't measure emoji width correctly
-    const summaryText = personal.subheadline[lang].replace(/\p{Emoji}/gu, '').replace(/\s{2,}/g, ' ').trim();
+    // Strip pictographic emoji only — \p{Emoji} also matches ASCII digits (0-9) used in keycap sequences
+    const summaryText = personal.subheadline[lang]
+      .replace(/\p{Extended_Pictographic}/gu, '')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
     font(8, false, C.muted);
     const summaryLines = wrap(summaryText, 100);
     pdf.text(summaryLines, mL, hy);
@@ -161,7 +164,19 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
       font(7.5, false, C.sub);
       const descLines = wrap(exp.description[lang], leftW);
       pdf.text(descLines, mL, lY);
-      lY += descLines.length * LH.xs + 2.5;
+      lY += descLines.length * LH.xs + 1.5;
+
+      if ('bullets' in exp && exp.bullets) {
+        exp.bullets[lang].forEach((bullet) => {
+          font(7.5, false, C.sub);
+          const bulletLines = wrap(`• ${bullet}`, leftW);
+          pdf.text(bulletLines, mL, lY);
+          lY += bulletLines.length * LH.xs;
+        });
+        lY += 1;
+      } else {
+        lY += 1;
+      }
     });
 
     // ── RIGHT SIDEBAR background (termina en la misma Y que la regla del pie) ──
@@ -181,25 +196,18 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
     // ── RIGHT: TECH STACK ──
     rY = section(rightX, rY, rightW, t('cv.technicalStack'));
 
-    font(7.5, true, C.sub);
-    pdf.text(techStack.production.title[lang], rightX, rY);
-    rY += 4;
-    techStack.production.items.forEach(item => {
-      font(7.5, false, C.body);
-      pdf.text(`• ${item.name}`, rightX, rY);
-      rY += LH.sm;
+    techStack.cvCategories.forEach((category, i) => {
+      if (i > 0) rY += 2;
+      font(7.5, true, C.sub);
+      pdf.text(category.title[lang], rightX, rY);
+      rY += 4;
+      category.items.forEach(item => {
+        font(7.5, false, C.body);
+        pdf.text(`• ${item}`, rightX, rY);
+        rY += LH.sm;
+      });
     });
     rY += 3;
-
-    font(7.5, true, C.sub);
-    pdf.text(techStack.experimental.title[lang], rightX, rY);
-    rY += 4;
-    techStack.experimental.items.forEach(item => {
-      font(7.5, false, C.body);
-      pdf.text(`• ${item.name}`, rightX, rY);
-      rY += LH.sm;
-    });
-    rY += 5;
 
     // ── RIGHT: LANGUAGES ──
     rY = section(rightX, rY, rightW, t('cv.languages'));
@@ -286,8 +294,7 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
       author: personal.name,
       keywords: [
         ...skills[lang],
-        ...techStack.production.items.map(i => i.name),
-        ...techStack.experimental.items.map(i => i.name),
+        ...techStack.cvCategories.flatMap(c => c.items),
       ].join(', '),
       creator: 'Portfolio Website',
     });
@@ -426,6 +433,13 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                         <p className="text-sm text-muted-foreground">
                           {exp.description[language as keyof typeof exp.description]}
                         </p>
+                        {"bullets" in exp && exp.bullets && (
+                          <ul className="mt-2 space-y-1 text-sm text-muted-foreground list-disc list-inside">
+                            {exp.bullets[language as keyof typeof exp.bullets].map((bullet) => (
+                              <li key={bullet}>{bullet}</li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -458,31 +472,20 @@ const LiveCVModal = ({ isOpen, onClose }: LiveCVModalProps) => {
                   <h2 className="text-lg font-bold text-foreground mb-4">{t("cv.technicalStack")}</h2>
 
                   <div className="space-y-4">
-                    <div>
-                      <p className="text-xs font-medium text-primary mb-2">
-                        {techStack.production.title[language as keyof typeof techStack.production.title]}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {techStack.production.items.map((item) => (
-                          <Badge key={item.name} variant="secondary" className="text-xs px-2.5 py-1.5 flex items-center justify-center" style={{ lineHeight: '1.2' }}>
-                            {item.name}
-                          </Badge>
-                        ))}
+                    {techStack.cvCategories.map((category) => (
+                      <div key={category.title.en}>
+                        <p className="text-xs font-medium text-primary mb-2">
+                          {category.title[language as keyof typeof category.title]}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {category.items.map((item) => (
+                            <Badge key={item} variant="secondary" className="text-xs px-2.5 py-1.5 flex items-center justify-center" style={{ lineHeight: '1.2' }}>
+                              {item}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-
-                    <div>
-                      <p className="text-xs font-medium text-accent mb-2">
-                        {techStack.experimental.title[language as keyof typeof techStack.experimental.title]}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {techStack.experimental.items.map((item) => (
-                          <Badge key={item.name} variant="secondary" className="text-xs bg-accent/10 px-2.5 py-1.5 flex items-center justify-center" style={{ lineHeight: '1.2' }}>
-                            {item.name}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
 

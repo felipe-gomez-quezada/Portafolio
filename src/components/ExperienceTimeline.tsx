@@ -104,6 +104,13 @@ const ExperienceTimeline = () => {
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     {exp.description[language as keyof typeof exp.description]}
                   </p>
+                  {"bullets" in exp && exp.bullets && (
+                    <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground list-disc list-inside">
+                      {exp.bullets[language as keyof typeof exp.bullets].map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </div>
             </div>

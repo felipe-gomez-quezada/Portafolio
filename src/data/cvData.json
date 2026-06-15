@@ -3,16 +3,16 @@
     "name": "Felipe Andrés Gómez Quezada",
     "shortName": "Felipe Gómez Quezada",
     "title": {
-      "es": "Chief Technology Officer & Software Engineer",
-      "en": "Chief Technology Officer & Software Engineer"
+      "es": "CTO | Software Engineer | SaaS Builder",
+      "en": "CTO | Software Engineer | SaaS Builder"
     },
     "headline": {
       "es": "Construyendo Equipos Tech de Alto Rendimiento & Arquitecturas Escalables.",
       "en": "Building High-Performance Tech Teams & Scalable Architectures."
     },
     "subheadline": {
-      "es": "CTO y Software Engineer con foco en escalar startups, construir equipos tecnológicos de alto rendimiento y convertir visión de negocio en productos con impacto medible.",
-      "en": "CTO and Software Engineer focused on scaling startups, building high-performance tech teams, and turning business vision into products with measurable impact."
+      "es": "CTO que conformó y lideró un equipo de 7 personas, diseñó arquitectura Azure para 85K+ usuarios y obtuvo $330M CLP en fondos de innovación CORFO, trabajando en partnership con C-suite. Construí en solitario Camino PAES, un SaaS en producción, con mentalidad DevOps y entrega continua en web y móvil.",
+      "en": "CTO who built and led a 7-person team, designed Azure-based architecture serving 85K+ users, and secured CLP $330M in CORFO innovation grants while partnering with C-suite stakeholders. Solo-built Camino PAES, a production SaaS platform, with a DevOps mindset and continuous delivery across web and mobile."
     },
     "location": "Santiago, Chile",
     "email": "felipe.gomez.quezada@gmail.com",
@@ -35,30 +35,62 @@
       "periodEn": "2024 - May 2026",
       "focus": {
         "es": "85.000+ colaboradores | 50 empresas",
-        "en": "85,000+ collaborators | 50 companies | CLP $330M CORFO"
+        "en": "85,000+ collaborators | 50 companies"
       },
       "description": {
-        "es": "Lideré la estrategia tecnológica de Lifebox, con impacto en más de 85.000 colaboradores en 50 de las empresas más grandes de Chile. Conformé y lideré el equipo tecnológico desde cero hasta un peak de 7 personas, obtuve y ejecuté dos fondos CORFO (Crea y Valida, y Consolida y Expande) aportando más de $330M CLP en ingresos, y definí la arquitectura y estándares de calidad de los productos de Lifebox sobre Azure.",
-        "en": "Led Lifebox's technology strategy, impacting more than 85,000 collaborators across 50 of Chile's largest companies. Built and led the tech team from scratch to a peak of 7 members, secured and executed two CORFO innovation grants (Crea y Valida, and Consolida y Expande) that contributed over CLP $330M in revenue, and defined architecture and quality standards for Lifebox products on Azure."
+        "es": "Lideré la estrategia tecnológica de Lifebox en partnership con C-suite, definiendo estándares de calidad y arquitectura de productos.",
+        "en": "Led Lifebox's technology strategy in partnership with C-suite stakeholders, defining product architecture and quality standards."
+      },
+      "bullets": {
+        "es": [
+          "Conformé y lideré el equipo tecnológico desde cero hasta un peak de 7 personas",
+          "Obtuve y ejecuté dos fondos CORFO (Crea y Valida, y Consolida y Expande) por $330M CLP en fondos de innovación",
+          "Arquitectura Azure: App Services, PostgreSQL, Blob Storage",
+          "Adopción de CI/CD y entrega continua en productos web y móvil",
+          "Herramientas de observabilidad: PostHog para monitoreo y respuesta a incidentes"
+        ],
+        "en": [
+          "Built and led the tech team from scratch to a peak of 7 members",
+          "Secured and executed two CORFO innovation grants (Crea y Valida, and Consolida y Expande) worth CLP $330M in innovation grants",
+          "Azure platform: App Services, PostgreSQL, Blob Storage",
+          "CI/CD adoption and continuous delivery across web and mobile products",
+          "Observability tooling: PostHog for monitoring and incident response"
+        ]
       },
       "current": false
     },
     {
       "id": 3,
       "role": {
-        "es": "Founder & CTO",
-        "en": "Founder & CTO"
+        "es": "Founder & CTO (construido en solitario)",
+        "en": "Founder & CTO (Solo-built)"
       },
       "company": "Camino PAES",
       "period": "2025 - Presente",
       "periodEn": "2025 - Present",
       "focus": {
-        "es": "375 usuarios | 700+ tests | ~700 preguntas",
-        "en": "375 users | 700+ tests | ~700 questions"
+        "es": "SaaS EdTech | Preparación PAES",
+        "en": "SaaS EdTech | PAES Preparation"
       },
       "description": {
-        "es": "Fundé y desarrollé de forma independiente una plataforma SaaS para preparación de la PAES (Prueba de Acceso a la Educación Superior en Chile). A mayo de 2026: 375 usuarios registrados, más de 700 tests realizados y ~700 preguntas en tres materias. Diseñé una arquitectura con taxonomía por materia/eje/tema, generación automática diaria vía edge functions, rankings y gamificación. Stack: Next.js, Supabase, Tailwind CSS y Vercel.",
-        "en": "Founded and independently built a SaaS platform for PAES preparation (Chile's university entrance exam). As of May 2026: 375 registered users, 700+ completed tests, and ~700 questions across three subjects. Designed an architecture with subject/axis/topic taxonomy, daily automated question generation via edge functions, rankings, and gamification. Stack: Next.js, Supabase, Tailwind CSS, and Vercel."
+        "es": "Plataforma SaaS para preparación de la PAES con taxonomía por materia/eje/tema, generación automática vía edge functions, rankings y gamificación.",
+        "en": "SaaS platform for PAES preparation with subject/axis/topic taxonomy, automated generation via edge functions, rankings, and gamification."
+      },
+      "bullets": {
+        "es": [
+          "375 usuarios registrados (a mayo 2026)",
+          "700+ tests realizados",
+          "~700 preguntas en tres materias",
+          "Pipeline serverless: Supabase Edge Functions + API de Anthropic",
+          "Entrega continua: ramas de features, separación de ambientes, deploys en Vercel"
+        ],
+        "en": [
+          "375 registered users (as of May 2026)",
+          "700+ completed tests",
+          "~700 questions across three subjects",
+          "Serverless pipeline: Supabase Edge Functions + Anthropic API",
+          "Continuous delivery: feature branches, env separation, Vercel deploys"
+        ]
       },
       "current": true
     },
@@ -148,8 +180,8 @@
       "institution": "Pontificia Universidad Católica de Chile",
       "period": "2014 - 2020",
       "description": {
-        "es": "",
-        "en": ""
+        "es": "Carrera de 6 años (equivalente a Ingeniería Civil en el sistema chileno)",
+        "en": "6-year engineering degree (equivalent to BSc + MSc in the Chilean system)"
       }
     }
   ],
@@ -177,6 +209,36 @@
     }
   ],
   "techStack": {
+    "cvCategories": [
+      {
+        "title": {
+          "es": "Cloud e Infraestructura",
+          "en": "Cloud & Infrastructure"
+        },
+        "items": ["Azure", "GCP", "AWS", "Vercel", "Docker"]
+      },
+      {
+        "title": {
+          "es": "Backend",
+          "en": "Backend"
+        },
+        "items": ["Python", "Django", "FastAPI", "Express.js", "PostgreSQL", "Supabase"]
+      },
+      {
+        "title": {
+          "es": "Frontend",
+          "en": "Frontend"
+        },
+        "items": ["Next.js", "Nuxt 3", "Vue", "Tailwind CSS"]
+      },
+      {
+        "title": {
+          "es": "DevOps y Observabilidad",
+          "en": "DevOps & Observability"
+        },
+        "items": ["CI/CD", "PostHog"]
+      }
+    ],
     "production": {
       "title": {
         "es": "Stack de Producción",
@@ -231,6 +293,16 @@
           "name": "Azure",
           "category": "Cloud Infrastructure",
           "icon": "Cloud"
+        },
+        {
+          "name": "Next.js",
+          "category": "Framework",
+          "icon": "Sparkles"
+        },
+        {
+          "name": "Supabase",
+          "category": "Backend as a Service",
+          "icon": "Database"
         }
       ]
     },
@@ -245,19 +317,9 @@
       },
       "items": [
         {
-          "name": "Next.js",
-          "category": "Framework",
-          "icon": "Sparkles"
-        },
-        {
           "name": "Vercel",
           "category": "Platform",
           "icon": "Triangle"
-        },
-        {
-          "name": "Supabase",
-          "category": "Backend as a Service",
-          "icon": "Database"
         },
         {
           "name": "Tailwind CSS",
@@ -316,20 +378,26 @@
   },
   "skills": {
     "es": [
-      "Liderazgo de Equipos Tecnológicos",
-      "Arquitectura y desarrollo de Software",
-      "Fondos de Innovación (CORFO)",
+      "Arquitectura Cloud (Azure, GCP, AWS)",
+      "DevOps y CI/CD",
+      "Cargas Serverless y en Contenedores",
+      "Observabilidad y Monitoreo",
       "Metodologías Ágiles",
-      "Escalamiento de Startups",
-      "Fundador de SaaS"
+      "Liderazgo de Equipos de Ingeniería",
+      "Gestión de Stakeholders Ejecutivos",
+      "Arquitectura SaaS",
+      "Financiamiento de Innovación (CORFO)"
     ],
     "en": [
-      "Technology Team Leadership",
-      "Software Architecture and Development",
-      "Innovation Funding",
-      "Agile Methodologies",
-      "Startup Scaling",
-      "SaaS Founder"
+      "Cloud Architecture (Azure, GCP, AWS)",
+      "DevOps & CI/CD",
+      "Serverless & Container Workloads",
+      "Observability & Monitoring",
+      "Agile Ways of Working",
+      "Engineering Team Leadership",
+      "Client & Executive Stakeholder Management",
+      "SaaS Architecture",
+      "Innovation Funding (CORFO)"
     ]
   }
 }
