@@ -25,6 +25,25 @@
   },
   "experience": [
     {
+      "id": 7,
+      "role": {
+        "es": "Senior Software Engineer",
+        "en": "Senior Software Engineer"
+      },
+      "company": "Ria Money Transfer",
+      "period": "Septiembre 2026 - Presente",
+      "periodEn": "September 2026 - Present",
+      "focus": {
+        "es": "Command Center | Equipo multidisciplinario en 4 países",
+        "en": "Command Center | Multidisciplinary team across 4 countries"
+      },
+      "description": {
+        "es": "Mejora continua y desarrollo de nuevas funcionalidades para el equipo de Command Center, a cargo de un conjunto de aplicaciones que apoyan la toma de decisiones de distintos miembros del equipo. Trabajo colaborativo con un equipo multidisciplinario distribuido en cuatro países.",
+        "en": "Continuous improvement and development of new features for the Command Center team, which owns a suite of applications that support decision-making across different team members. Collaborating with a multidisciplinary team distributed across four countries."
+      },
+      "current": true
+    },
+    {
       "id": 1,
       "role": {
         "es": "CTO",

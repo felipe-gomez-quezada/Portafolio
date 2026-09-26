@@ -36,7 +36,7 @@ const HeroSection = ({ onOpenCV }: HeroSectionProps) => {
               to="/contacto"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-pointer group animate-fade-in"
             >
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse-glow" />
+              <span className="w-2 h-2 rounded-full bg-muted-foreground" />
               <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors">
                 {t("hero.available")}
               </span>

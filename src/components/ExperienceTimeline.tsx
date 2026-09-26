@@ -5,6 +5,7 @@ import cvData from "@/data/cvData.json";
 
 // Mapeo de nombres de empresas a sus logos
 const companyLogos: Record<string, string> = {
+  "Ria Money Transfer": "/logos/Ria logo.png",
   "Lifebox": "/logos/Lifebox logo.png",
   "Camino PAES": "/logos/Camino PAES logo.png",
   "Toku": "/logos/Toku logo.png",
@@ -60,6 +61,8 @@ const ExperienceTimeline = () => {
                         ? "h-[110px]"
                         : exp.company === "Camino PAES"
                         ? "h-[256px]"
+                        : exp.company === "Ria Money Transfer"
+                        ? "h-[120px]"
                         : "h-24"
                     }`}
                   />
